@@ -25,7 +25,7 @@ By default, the module classes are not loaded automatically. You can autoload yo
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "Modules\\": "Plugins/"
+      "Plugins\\": "Plugins/"
     }
   }
 }
