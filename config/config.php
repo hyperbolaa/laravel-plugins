@@ -36,9 +36,7 @@ return [
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',
             'assets/js/app' => 'Resources/assets/js/app.js',
-            'assets/sass/app' => 'Resources/assets/sass/app.scss',
-            'webpack' => 'webpack.mix.js',
-            'package' => 'package.json',
+            'assets/css/app' => 'Resources/assets/css/app.scss',
         ],
         'replacements' => [
             'routes/web' => ['LOWER_NAME', 'STUDLY_NAME'],
@@ -71,7 +69,7 @@ return [
         |
         */
 
-        'modules' => base_path('Modules'),
+        'modules' => base_path('Plugins'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path
@@ -81,18 +79,8 @@ return [
         |
         */
 
-        'assets' => public_path('modules'),
-        /*
-        |--------------------------------------------------------------------------
-        | The migrations path
-        |--------------------------------------------------------------------------
-        |
-        | Where you run 'module:publish-migration' command, where do you publish the
-        | the migration files?
-        |
-        */
+        'assets' => public_path('plugins'),
 
-        'migration' => base_path('database/migrations'),
         /*
         |--------------------------------------------------------------------------
         | Generator path
@@ -103,8 +91,6 @@ return [
         'generator' => [
             'config' => ['path' => 'Config', 'generate' => true],
             'command' => ['path' => 'Console', 'generate' => true],
-            'migration' => ['path' => 'Database/Migrations', 'generate' => true],
-            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
             'factory' => ['path' => 'Database/factories', 'generate' => true],
             'model' => ['path' => 'Entities', 'generate' => true],
             'routes' => ['path' => 'Routes', 'generate' => true],
@@ -118,13 +104,7 @@ return [
             'test' => ['path' => 'Tests/Unit', 'generate' => true],
             'test-feature' => ['path' => 'Tests/Feature', 'generate' => true],
             'repository' => ['path' => 'Repositories', 'generate' => false],
-            'event' => ['path' => 'Events', 'generate' => false],
-            'listener' => ['path' => 'Listeners', 'generate' => false],
-            'policies' => ['path' => 'Policies', 'generate' => false],
             'rules' => ['path' => 'Rules', 'generate' => false],
-            'jobs' => ['path' => 'Jobs', 'generate' => false],
-            'emails' => ['path' => 'Emails', 'generate' => false],
-            'notifications' => ['path' => 'Notifications', 'generate' => false],
             'resource' => ['path' => 'Transformers', 'generate' => false],
             'component-view' => ['path' => 'Resources/views/components', 'generate' => false],
             'component-class' => ['path' => 'View/Components', 'generate' => false],
@@ -149,12 +129,7 @@ return [
         Commands\DisableCommand::class,
         Commands\DumpCommand::class,
         Commands\EnableCommand::class,
-        Commands\EventMakeCommand::class,
-        Commands\JobMakeCommand::class,
-        Commands\ListenerMakeCommand::class,
-        Commands\MailMakeCommand::class,
         Commands\MiddlewareMakeCommand::class,
-        Commands\NotificationMakeCommand::class,
         Commands\ProviderMakeCommand::class,
         Commands\RouteProviderMakeCommand::class,
         Commands\InstallCommand::class,
@@ -162,22 +137,12 @@ return [
         Commands\ModuleDeleteCommand::class,
         Commands\ModuleMakeCommand::class,
         Commands\FactoryMakeCommand::class,
-        Commands\PolicyMakeCommand::class,
         Commands\RequestMakeCommand::class,
         Commands\RuleMakeCommand::class,
-        Commands\MigrateCommand::class,
-        Commands\MigrateRefreshCommand::class,
-        Commands\MigrateResetCommand::class,
-        Commands\MigrateRollbackCommand::class,
-        Commands\MigrateStatusCommand::class,
-        Commands\MigrationMakeCommand::class,
         Commands\ModelMakeCommand::class,
         Commands\PublishCommand::class,
         Commands\PublishConfigurationCommand::class,
-        Commands\PublishMigrationCommand::class,
         Commands\PublishTranslationCommand::class,
-        Commands\SeedCommand::class,
-        Commands\SeedMakeCommand::class,
         Commands\SetupCommand::class,
         Commands\UnUseCommand::class,
         Commands\UpdateCommand::class,
@@ -216,8 +181,8 @@ return [
     'composer' => [
         'vendor' => 'hyperbolaa',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'yuchong',
+            'email' => 'chongyu366@gmail.com',
         ],
         'composer-output' => false,
     ],
@@ -232,7 +197,7 @@ return [
     */
     'cache' => [
         'enabled' => false,
-        'key' => 'laravel-modules',
+        'key' => 'laravel-plugins',
         'lifetime' => 60,
     ],
     /*
