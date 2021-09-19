@@ -5,7 +5,7 @@ namespace Hyperbolaa\Plugins\Publishing;
 use Illuminate\Console\Command;
 use Hyperbolaa\Plugins\Contracts\PublisherInterface;
 use Hyperbolaa\Plugins\Contracts\RepositoryInterface;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -53,9 +53,9 @@ abstract class Publisher implements PublisherInterface
     /**
      * The constructor.
      *
-     * @param Module $module
+     * @param Plugin $module
      */
-    public function __construct(Module $module)
+    public function __construct(Plugin $module)
     {
         $this->module = $module;
     }
@@ -87,7 +87,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get module instance.
      *
-     * @return \Hyperbolaa\Plugins\Module
+     * @return \Hyperbolaa\Plugins\Plugin
      */
     public function getModule()
     {

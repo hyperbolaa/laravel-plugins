@@ -3,7 +3,7 @@
 namespace Hyperbolaa\Plugins\Commands;
 
 use Illuminate\Console\Command;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 use Hyperbolaa\Plugins\Publishing\LangPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -56,7 +56,7 @@ class PublishTranslationCommand extends Command
      */
     public function publish($name)
     {
-        if ($name instanceof Module) {
+        if ($name instanceof Plugin) {
             $module = $name;
         } else {
             $module = $this->laravel['modules']->findOrFail($name);

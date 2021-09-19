@@ -3,7 +3,7 @@
 namespace Hyperbolaa\Plugins\Contracts;
 
 use Hyperbolaa\Plugins\Exceptions\PluginNotFoundException;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 
 interface RepositoryInterface
 {
@@ -83,7 +83,7 @@ interface RepositoryInterface
      * Find a specific module.
      *
      * @param $name
-     * @return Module|null
+     * @return Plugin|null
      */
     public function find(string $name);
 
@@ -131,7 +131,7 @@ interface RepositoryInterface
     /**
      * Find a specific module by its alias.
      * @param string $alias
-     * @return Module|void
+     * @return Plugin|void
      */
     public function findByAlias(string $alias);
 

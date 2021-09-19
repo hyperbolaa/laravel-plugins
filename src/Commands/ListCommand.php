@@ -3,7 +3,7 @@
 namespace Hyperbolaa\Plugins\Commands;
 
 use Illuminate\Console\Command;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListCommand extends Command
@@ -41,7 +41,7 @@ class ListCommand extends Command
     {
         $rows = [];
 
-        /** @var Module $module */
+        /** @var Plugin $module */
         foreach ($this->getModules() as $module) {
             $rows[] = [
                 $module->getName(),

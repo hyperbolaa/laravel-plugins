@@ -2,41 +2,41 @@
 
 namespace Hyperbolaa\Plugins\Contracts;
 
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 
 interface ActivatorInterface
 {
     /**
      * Enables a module
      *
-     * @param Module $module
+     * @param Plugin $module
      */
-    public function enable(Module $module): void;
+    public function enable(Plugin $module): void;
 
     /**
      * Disables a module
      *
-     * @param Module $module
+     * @param Plugin $module
      */
-    public function disable(Module $module): void;
+    public function disable(Plugin $module): void;
 
     /**
      * Determine whether the given status same with a module status.
      *
-     * @param Module $module
+     * @param Plugin $module
      * @param bool $status
      *
      * @return bool
      */
-    public function hasStatus(Module $module, bool $status): bool;
+    public function hasStatus(Plugin $module, bool $status): bool;
 
     /**
      * Set active state for a module.
      *
-     * @param Module $module
+     * @param Plugin $module
      * @param bool $active
      */
-    public function setActive(Module $module, bool $active): void;
+    public function setActive(Plugin $module, bool $active): void;
 
     /**
      * Sets a module status by its name
@@ -49,9 +49,9 @@ interface ActivatorInterface
     /**
      * Deletes a module activation status
      *
-     * @param  Module $module
+     * @param  Plugin $module
      */
-    public function delete(Module $module): void;
+    public function delete(Plugin $module): void;
 
     /**
      * Deletes any module activation statuses created by this class.

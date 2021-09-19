@@ -3,7 +3,7 @@
 namespace Hyperbolaa\Plugins\Commands;
 
 use Illuminate\Support\Str;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 use Hyperbolaa\Plugins\Support\Config\GenerateConfigReader;
 use Hyperbolaa\Plugins\Support\Stub;
 use Hyperbolaa\Plugins\Traits\ModuleCommandTrait;
@@ -74,7 +74,7 @@ class ProviderMakeCommand extends GeneratorCommand
     {
         $stub = $this->option('master') ? 'scaffold/provider' : 'provider';
 
-        /** @var Module $module */
+        /** @var Plugin $module */
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
 
         return (new Stub('/' . $stub . '.stub', [

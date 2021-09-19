@@ -51,7 +51,7 @@ class PluginGenerator extends Generator
     /**
      * The module instance.
      *
-     * @var \Hyperbolaa\Plugins\Module
+     * @var \Hyperbolaa\Plugins\Plugin
      */
     protected $module;
 
@@ -227,7 +227,7 @@ class PluginGenerator extends Generator
     /**
      * Get the module instance.
      *
-     * @return \Hyperbolaa\Plugins\Module
+     * @return \Hyperbolaa\Plugins\Plugin
      */
     public function getModule()
     {

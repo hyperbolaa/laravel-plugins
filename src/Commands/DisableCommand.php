@@ -3,7 +3,7 @@
 namespace Hyperbolaa\Plugins\Commands;
 
 use Illuminate\Console\Command;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 
 class DisableCommand extends Command
@@ -34,7 +34,7 @@ class DisableCommand extends Command
             $this->disableAll();
         }
 
-        /** @var Module $module */
+        /** @var Plugin $module */
         $module = $this->laravel['modules']->findOrFail($this->argument('module'));
 
         if ($module->isEnabled()) {
@@ -55,7 +55,7 @@ class DisableCommand extends Command
      */
     public function disableAll()
     {
-        /** @var Modules $modules */
+        /** @var Plugin $modules */
         $modules = $this->laravel['modules']->all();
 
         foreach ($modules as $module) {

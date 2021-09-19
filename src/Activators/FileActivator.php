@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Hyperbolaa\Plugins\Contracts\ActivatorInterface;
-use Hyperbolaa\Plugins\Module;
+use Hyperbolaa\Plugins\Plugin;
 
 class FileActivator implements ActivatorInterface
 {
@@ -93,7 +93,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function enable(Module $module): void
+    public function enable(Plugin $module): void
     {
         $this->setActiveByName($module->getName(), true);
     }
@@ -101,7 +101,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function disable(Module $module): void
+    public function disable(Plugin $module): void
     {
         $this->setActiveByName($module->getName(), false);
     }
@@ -109,7 +109,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function hasStatus(Module $module, bool $status): bool
+    public function hasStatus(Plugin $module, bool $status): bool
     {
         if (!isset($this->modulesStatuses[$module->getName()])) {
             return $status === false;
@@ -121,7 +121,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function setActive(Module $module, bool $active): void
+    public function setActive(Plugin $module, bool $active): void
     {
         $this->setActiveByName($module->getName(), $active);
     }
@@ -139,7 +139,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function delete(Module $module): void
+    public function delete(Plugin $module): void
     {
         if (!isset($this->modulesStatuses[$module->getName()])) {
             return;
