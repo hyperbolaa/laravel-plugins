@@ -18,7 +18,7 @@ php artisan vendor:publish --provider="Hyperbolaa\Plugins\LaravelPluginsServiceP
 
 ### Autoloading
 
-By default, the module classes are not loaded automatically. You can autoload your plugins using `psr-4`. For example:
+By default, the plugin classes are not loaded automatically. You can autoload your plugins using `psr-4`. For example:
 
 ``` json
 {
