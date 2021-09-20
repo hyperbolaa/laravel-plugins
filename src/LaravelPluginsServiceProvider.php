@@ -14,7 +14,7 @@ class LaravelPluginsServiceProvider extends PluginsServiceProvider
     public function boot()
     {
         $this->registerNamespaces();
-        $this->registerModules();
+        $this->registerPlugins();
     }
 
     /**
@@ -52,13 +52,13 @@ class LaravelPluginsServiceProvider extends PluginsServiceProvider
     protected function registerServices()
     {
         $this->app->singleton(Contracts\RepositoryInterface::class, function ($app) {
-            $path = $app['config']->get('modules.paths.modules');
+            $path = $app['config']->get('plugins.paths.plugins');
 
             return new Laravel\LaravelFileRepository($app, $path);
         });
         $this->app->singleton(Contracts\ActivatorInterface::class, function ($app) {
-            $activator = $app['config']->get('modules.activator');
-            $class = $app['config']->get('modules.activators.' . $activator)['class'];
+            $activator = $app['config']->get('plugins.activator');
+            $class = $app['config']->get('plugins.activators.' . $activator)['class'];
 
             if ($class === null) {
                 throw InvalidActivatorClass::missingConfig();
@@ -66,6 +66,6 @@ class LaravelPluginsServiceProvider extends PluginsServiceProvider
 
             return new $class($app);
         });
-        $this->app->alias(Contracts\RepositoryInterface::class, 'modules');
+        $this->app->alias(Contracts\RepositoryInterface::class, 'plugins');
     }
 }

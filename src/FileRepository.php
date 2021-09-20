@@ -160,7 +160,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all modules.
+     * Get all plugins.
      *
      * @return array
      */
@@ -174,7 +174,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Format the cached data as array of modules.
+     * Format the cached data as array of plugins.
      *
      * @param array $cached
      *
@@ -194,7 +194,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get cached modules.
+     * Get cached plugins.
      *
      * @return array
      */
@@ -206,7 +206,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all modules as collection instance.
+     * Get all plugins as collection instance.
      *
      * @return Collection
      */
@@ -216,7 +216,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get modules by status.
+     * Get plugins by status.
      *
      * @param $status
      *
@@ -237,7 +237,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Determine whether the given module exist.
+     * Determine whether the given plugin exist.
      *
      * @param $name
      *
@@ -249,7 +249,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get list of enabled modules.
+     * Get list of enabled plugins.
      *
      * @return array
      */
@@ -259,7 +259,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get list of disabled modules.
+     * Get list of disabled plugins.
      *
      * @return array
      */
@@ -269,7 +269,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get count from all modules.
+     * Get count from all plugins.
      *
      * @return int
      */
@@ -279,7 +279,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all ordered modules.
+     * Get all ordered plugins.
      *
      * @param string $direction
      *
@@ -309,7 +309,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function getPath() : string
     {
-        return $this->path ?: $this->config('paths.modules', base_path('Modules'));
+        return $this->path ?: $this->config('paths.plugins', base_path('Modules'));
     }
 
     /**
@@ -377,7 +377,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Find a specific module, if there return that, otherwise throw exception.
+     * Find a specific plugin, if there return that, otherwise throw exception.
      *
      * @param $name
      *
@@ -397,7 +397,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all modules as laravel collection instance.
+     * Get all plugins as laravel collection instance.
      *
      * @param $status
      *
@@ -409,7 +409,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get module path for a specific module.
+     * Get plugin path for a specific plugin.
      *
      * @param $module
      *
@@ -437,22 +437,22 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function config(string $key, $default = null)
     {
-        return $this->config->get('modules.' . $key, $default);
+        return $this->config->get('plugins.' . $key, $default);
     }
 
     /**
-     * Get storage path for module used.
+     * Get storage path for plugin used.
      *
      * @return string
      */
     public function getUsedStoragePath() : string
     {
-        $directory = storage_path('app/modules');
+        $directory = storage_path('app/plugins');
         if ($this->getFiles()->exists($directory) === false) {
             $this->getFiles()->makeDirectory($directory, 0777, true);
         }
 
-        $path = storage_path('app/modules/modules.used');
+        $path = storage_path('app/plugins/plugins.used');
         if (!$this->getFiles()->exists($path)) {
             $this->getFiles()->put($path, '');
         }
@@ -461,7 +461,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Set module used for cli session.
+     * Set plugin used for cli session.
      *
      * @param $name
      *
@@ -475,7 +475,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Forget the module used for cli session.
+     * Forget the plugin used for cli session.
      */
     public function forgetUsed()
     {
@@ -485,7 +485,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get module used for cli session.
+     * Get plugin used for cli session.
      * @return string
      * @throws \Hyperbolaa\Plugins\Exceptions\PluginNotFoundException
      */
@@ -505,7 +505,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get module assets path.
+     * Get plugin assets path.
      *
      * @return string
      */
@@ -515,7 +515,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get asset url from a specific module.
+     * Get asset url from a specific plugin.
      * @param string $asset
      * @return string
      * @throws InvalidAssetPath
@@ -551,7 +551,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Enabling a specific module.
+     * Enabling a specific plugin.
      * @param string $name
      * @return void
      * @throws \Hyperbolaa\Plugins\Exceptions\PluginNotFoundException
@@ -562,7 +562,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Disabling a specific module.
+     * Disabling a specific plugin.
      * @param string $name
      * @return void
      * @throws \Hyperbolaa\Plugins\Exceptions\PluginNotFoundException
@@ -581,7 +581,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Update dependencies for the specified module.
+     * Update dependencies for the specified plugin.
      *
      * @param string $module
      */
@@ -591,7 +591,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Install the specified module.
+     * Install the specified plugin.
      *
      * @param string $name
      * @param string $version

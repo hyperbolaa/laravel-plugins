@@ -17,16 +17,16 @@ abstract class PluginsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register all modules.
+     * Register all plugins.
      */
     public function register()
     {
     }
 
     /**
-     * Register all modules.
+     * Register all plugins.
      */
-    protected function registerModules()
+    protected function registerPlugins()
     {
         $this->app->register(BootstrapServiceProvider::class);
     }

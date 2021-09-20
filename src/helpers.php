@@ -3,7 +3,7 @@
 if (! function_exists('plugin_path')) {
     function plugin_path($name, $path = '')
     {
-        $module = app('modules')->find($name);
+        $module = app('plugins')->find($name);
 
         return $module->getPath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
