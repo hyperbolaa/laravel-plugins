@@ -419,7 +419,7 @@ abstract class Plugin
     {
         return config('plugins.register.files', 'register') === 'boot' &&
             // force register method if option == boot && app is AsgardCms
-            !class_exists('\Modules\Core\Foundation\AsgardCms');
+            !class_exists('\Plugins\Core\Foundation\AsgardCms');
     }
 
     private function flushCache(): void

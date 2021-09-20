@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\": ""
+            "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\": ""
         }
     }
 }

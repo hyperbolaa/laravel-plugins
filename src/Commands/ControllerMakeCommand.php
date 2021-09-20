@@ -56,16 +56,16 @@ class ControllerMakeCommand extends GeneratorCommand
         $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub($this->getStubName(), [
-            'MODULENAME'        => $plugin->getStudlyName(),
+            'PLUGINNAME'        => $plugin->getStudlyName(),
             'CONTROLLERNAME'    => $this->getControllerName(),
             'NAMESPACE'         => $plugin->getStudlyName(),
             'CLASS_NAMESPACE'   => $this->getClassNamespace($plugin),
             'CLASS'             => $this->getControllerNameWithoutNamespace(),
             'LOWER_NAME'        => $plugin->getLowerName(),
-            'MODULE'            => $this->getPluginName(),
+            'PLUGIN'            => $this->getPluginName(),
             'NAME'              => $this->getPluginName(),
             'STUDLY_NAME'       => $plugin->getStudlyName(),
-            'MODULE_NAMESPACE'  => $this->laravel['plugins']->config('namespace'),
+            'PLUGIN_NAMESPACE'  => $this->laravel['plugins']->config('namespace'),
         ]))->render();
     }
 

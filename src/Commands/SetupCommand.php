@@ -37,8 +37,8 @@ class SetupCommand extends Command
     {
         return $this->generateDirectory(
             $this->laravel['plugins']->config('paths.plugins'),
-            'Modules directory created successfully',
-            'Modules directory already exist'
+            'Plugins directory created successfully',
+            'Plugins directory already exist'
         );
     }
 

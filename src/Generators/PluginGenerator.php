@@ -479,7 +479,7 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Get replacement for $MODULE_NAMESPACE$.
+     * Get replacement for $PLUGIN_NAMESPACE$.
      *
      * @return string
      */
