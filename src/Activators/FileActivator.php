@@ -48,7 +48,7 @@ class FileActivator implements ActivatorInterface
      *
      * @var array
      */
-    private $modulesStatuses;
+    private $pluginsStatuses;
 
     /**
      * File used to store activation statuses
@@ -65,7 +65,7 @@ class FileActivator implements ActivatorInterface
         $this->statusesFile = $this->config('statuses-file');
         $this->cacheKey = $this->config('cache-key');
         $this->cacheLifetime = $this->config('cache-lifetime');
-        $this->modulesStatuses = $this->getModulesStatuses();
+        $this->pluginsStatuses = $this->getPluginsStatuses();
     }
 
     /**
@@ -86,7 +86,7 @@ class FileActivator implements ActivatorInterface
         if ($this->files->exists($this->statusesFile)) {
             $this->files->delete($this->statusesFile);
         }
-        $this->modulesStatuses = [];
+        $this->pluginsStatuses = [];
         $this->flushCache();
     }
 
@@ -111,11 +111,11 @@ class FileActivator implements ActivatorInterface
      */
     public function hasStatus(Plugin $module, bool $status): bool
     {
-        if (!isset($this->modulesStatuses[$module->getName()])) {
+        if (!isset($this->pluginsStatuses[$module->getName()])) {
             return $status === false;
         }
 
-        return $this->modulesStatuses[$module->getName()] === $status;
+        return $this->pluginsStatuses[$module->getName()] === $status;
     }
 
     /**
@@ -131,7 +131,7 @@ class FileActivator implements ActivatorInterface
      */
     public function setActiveByName(string $name, bool $status): void
     {
-        $this->modulesStatuses[$name] = $status;
+        $this->pluginsStatuses[$name] = $status;
         $this->writeJson();
         $this->flushCache();
     }
@@ -141,10 +141,10 @@ class FileActivator implements ActivatorInterface
      */
     public function delete(Plugin $module): void
     {
-        if (!isset($this->modulesStatuses[$module->getName()])) {
+        if (!isset($this->pluginsStatuses[$module->getName()])) {
             return;
         }
-        unset($this->modulesStatuses[$module->getName()]);
+        unset($this->pluginsStatuses[$module->getName()]);
         $this->writeJson();
         $this->flushCache();
     }
@@ -154,7 +154,7 @@ class FileActivator implements ActivatorInterface
      */
     private function writeJson(): void
     {
-        $this->files->put($this->statusesFile, json_encode($this->modulesStatuses, JSON_PRETTY_PRINT));
+        $this->files->put($this->statusesFile, json_encode($this->pluginsStatuses, JSON_PRETTY_PRINT));
     }
 
     /**
@@ -177,7 +177,7 @@ class FileActivator implements ActivatorInterface
      * @return array
      * @throws FileNotFoundException
      */
-    private function getModulesStatuses(): array
+    private function getPluginsStatuses(): array
     {
         if (!$this->config->get('modules.cache.enabled')) {
             return $this->readJson();
