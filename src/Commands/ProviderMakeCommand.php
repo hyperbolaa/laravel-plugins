@@ -37,7 +37,7 @@ class ProviderMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['modules'];
+        $module = $this->laravel['plugins'];
 
         return $module->config('paths.generator.provider.namespace') ?: $module->config('paths.generator.provider.path', 'Providers');
     }
@@ -75,7 +75,7 @@ class ProviderMakeCommand extends GeneratorCommand
         $stub = $this->option('master') ? 'scaffold/provider' : 'provider';
 
         /** @var Plugin $module */
-        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
+        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/' . $stub . '.stub', [
             'NAMESPACE'         => $this->getClassNamespace($module),
@@ -84,7 +84,7 @@ class ProviderMakeCommand extends GeneratorCommand
             'MODULE'            => $this->getPluginName(),
             'NAME'              => $this->getFileName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
-            'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
+            'MODULE_NAMESPACE'  => $this->laravel['plugins']->config('namespace'),
             'PATH_VIEWS'        => GenerateConfigReader::read('views')->getPath(),
             'PATH_LANG'         => GenerateConfigReader::read('lang')->getPath(),
             'PATH_CONFIG'       => GenerateConfigReader::read('config')->getPath(),
@@ -98,7 +98,7 @@ class ProviderMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
+        $path = $this->laravel['plugins']->getPluginPath($this->getPluginName());
 
         $generatorPath = GenerateConfigReader::read('provider');
 

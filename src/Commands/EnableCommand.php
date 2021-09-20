@@ -37,7 +37,7 @@ class EnableCommand extends Command
         }
 
         /** @var Plugin $module */
-        $module = $this->laravel['modules']->findOrFail($this->argument('module'));
+        $module = $this->laravel['plugins']->findOrFail($this->argument('module'));
 
         if ($module->isDisabled()) {
             $module->enable();
@@ -58,7 +58,7 @@ class EnableCommand extends Command
     public function enableAll()
     {
         /** @var Plugin $modules */
-        $modules = $this->laravel['modules']->all();
+        $modules = $this->laravel['plugins']->all();
 
         foreach ($modules as $module) {
             if ($module->isDisabled()) {

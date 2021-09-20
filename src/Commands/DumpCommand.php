@@ -31,7 +31,7 @@ class DumpCommand extends Command
         if ($module = $this->argument('module')) {
             $this->dump($module);
         } else {
-            foreach ($this->laravel['modules']->all() as $module) {
+            foreach ($this->laravel['plugins']->all() as $module) {
                 $this->dump($module->getStudlyName());
             }
         }
@@ -41,7 +41,7 @@ class DumpCommand extends Command
 
     public function dump($module)
     {
-        $module = $this->laravel['modules']->findOrFail($module);
+        $module = $this->laravel['plugins']->findOrFail($module);
 
         $this->line("<comment>Running for module</comment>: {$module}");
 

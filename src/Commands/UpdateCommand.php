@@ -38,7 +38,7 @@ class UpdateCommand extends Command
         }
 
         /** @var \Hyperbolaa\Plugins\Plugin $module */
-        foreach ($this->laravel['modules']->getOrdered() as $module) {
+        foreach ($this->laravel['plugins']->getOrdered() as $module) {
             $this->updateModule($module->getName());
         }
 
@@ -49,7 +49,7 @@ class UpdateCommand extends Command
     {
         $this->line('Running for module: <info>' . $name . '</info>');
 
-        $this->laravel['modules']->update($name);
+        $this->laravel['plugins']->update($name);
 
         $this->info("Module [{$name}] updated successfully.");
     }

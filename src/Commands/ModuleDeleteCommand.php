@@ -12,7 +12,7 @@ class ModuleDeleteCommand extends Command
 
     public function handle() : int
     {
-        $this->laravel['modules']->delete($this->argument('module'));
+        $this->laravel['plugins']->delete($this->argument('module'));
 
         $this->info("Module {$this->argument('module')} has been deleted.");
 

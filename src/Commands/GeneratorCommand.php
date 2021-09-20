@@ -89,7 +89,7 @@ abstract class GeneratorCommand extends Command
 
         $extra = str_replace('/', '\\', $extra);
 
-        $namespace = $this->laravel['modules']->config('namespace');
+        $namespace = $this->laravel['plugins']->config('namespace');
 
         $namespace .= '\\' . $module->getStudlyName();
 

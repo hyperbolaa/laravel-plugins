@@ -51,7 +51,7 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
+        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/factory.stub', [
             'NAMESPACE' => $this->getClassNamespace($module),
@@ -65,7 +65,7 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
+        $path = $this->laravel['plugins']->getPluginPath($this->getPluginName());
 
         $factoryPath = GenerateConfigReader::read('factory');
 
@@ -95,7 +95,7 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     public function getDefaultNamespace(): string
     {
-        $module = $this->laravel['modules'];
+        $module = $this->laravel['plugins'];
 
         return $module->config('paths.generator.factory.namespace') ?: $module->config('paths.generator.factory.path');
     }
@@ -107,6 +107,6 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     public function getModelNamespace(): string
     {
-        return $this->laravel['modules']->config('namespace') . '\\' . $this->laravel['modules']->findOrFail($this->getPluginName()) . '\\' . $this->laravel['modules']->config('paths.generator.model.path', 'Entities');
+        return $this->laravel['plugins']->config('namespace') . '\\' . $this->laravel['plugins']->findOrFail($this->getPluginName()) . '\\' . $this->laravel['plugins']->config('paths.generator.model.path', 'Entities');
     }
 }

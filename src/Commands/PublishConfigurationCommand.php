@@ -34,7 +34,7 @@ class PublishConfigurationCommand extends Command
             return 0;
         }
 
-        foreach ($this->laravel['modules']->allEnabled() as $module) {
+        foreach ($this->laravel['plugins']->allEnabled() as $module) {
             $this->publishConfiguration($module->getName());
         }
 

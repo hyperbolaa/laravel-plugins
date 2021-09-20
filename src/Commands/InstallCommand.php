@@ -96,7 +96,7 @@ class InstallCommand extends Command
             $tree ?: $this->option('tree')
         );
 
-        $installer->setRepository($this->laravel['modules']);
+        $installer->setRepository($this->laravel['plugins']);
 
         $installer->setConsole($this);
 

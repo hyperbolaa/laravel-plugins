@@ -35,7 +35,7 @@ class ModuleMakeCommand extends Command
         foreach ($names as $name) {
             $code = with(new PluginGenerator($name))
                 ->setFilesystem($this->laravel['files'])
-                ->setModule($this->laravel['modules'])
+                ->setModule($this->laravel['plugins'])
                 ->setConfig($this->laravel['config'])
                 ->setActivator($this->laravel[ActivatorInterface::class])
                 ->setConsole($this)
