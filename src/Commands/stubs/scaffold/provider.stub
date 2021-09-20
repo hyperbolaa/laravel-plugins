@@ -27,7 +27,7 @@ class $CLASS$ extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path($this->moduleName, '$MIGRATIONS_PATH$'));
+        $this->loadMigrationsFrom(plugin_path($this->moduleName, '$MIGRATIONS_PATH$'));
     }
 
     /**
@@ -48,10 +48,10 @@ class $CLASS$ extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path($this->moduleName, '$PATH_CONFIG$/config.php') => config_path($this->moduleNameLower . '.php'),
+            plugin_path($this->moduleName, '$PATH_CONFIG$/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, '$PATH_CONFIG$/config.php'), $this->moduleNameLower
+            plugin_path($this->moduleName, '$PATH_CONFIG$/config.php'), $this->moduleNameLower
         );
     }
 
@@ -64,7 +64,7 @@ class $CLASS$ extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = module_path($this->moduleName, '$PATH_VIEWS$');
+        $sourcePath = plugin_path($this->moduleName, '$PATH_VIEWS$');
 
         $this->publishes([
             $sourcePath => $viewPath
@@ -85,7 +85,7 @@ class $CLASS$ extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         } else {
-            $this->loadTranslationsFrom(module_path($this->moduleName, '$PATH_LANG$'), $this->moduleNameLower);
+            $this->loadTranslationsFrom(plugin_path($this->moduleName, '$PATH_LANG$'), $this->moduleNameLower);
         }
     }
 

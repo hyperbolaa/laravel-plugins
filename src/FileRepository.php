@@ -131,7 +131,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * @param string $path
      * @return \Hyperbolaa\Plugins\Plugin
      */
-    abstract protected function createModule(...$args);
+    abstract protected function createPlugin(...$args);
 
     /**
      * Get & scan all plugins.
@@ -152,7 +152,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             foreach ($manifests as $manifest) {
                 $name = Json::make($manifest)->get('name');
 
-                $plugins[$name] = $this->createModule($this->app, $name, dirname($manifest));
+                $plugins[$name] = $this->createPlugin($this->app, $name, dirname($manifest));
             }
         }
 
@@ -187,7 +187,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
         foreach ($cached as $name => $module) {
             $path = $module['path'];
 
-            $plugins[$name] = $this->createModule($this->app, $name, $path);
+            $plugins[$name] = $this->createPlugin($this->app, $name, $path);
         }
 
         return $plugins;
@@ -523,7 +523,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     public function asset($asset) : string
     {
         if (Str::contains($asset, ':') === false) {
-            throw InvalidAssetPath::missingModuleName($asset);
+            throw InvalidAssetPath::missingPluginName($asset);
         }
         list($name, $url) = explode(':', $asset);
 

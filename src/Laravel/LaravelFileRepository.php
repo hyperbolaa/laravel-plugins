@@ -9,7 +9,7 @@ class LaravelFileRepository extends FileRepository
     /**
      * {@inheritdoc}
      */
-    protected function createModule(...$args)
+    protected function createPlugin(...$args)
     {
         return new Plugin(...$args);
     }
