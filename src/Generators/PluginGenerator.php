@@ -301,7 +301,7 @@ class PluginGenerator extends Generator
 
         $this->generateFolders();
 
-        $this->generateModuleJsonFile();
+        $this->generatePluginJsonFile();
 
         if ($this->type !== 'plain') {
             $this->generateFiles();
@@ -410,60 +410,13 @@ class PluginGenerator extends Generator
      */
     protected function getStubContents($stub)
     {
-        return (new Stub(
-            '/' . $stub . '.stub',
-            $this->getReplacement($stub)
-        )
-        )->render();
-    }
-
-    /**
-     * get the list for the replacements.
-     */
-    public function getReplacements()
-    {
-        return $this->module->config('stubs.replacements');
-    }
-
-    /**
-     * Get array replacement for the specified stub.
-     *
-     * @param $stub
-     *
-     * @return array
-     */
-    protected function getReplacement($stub)
-    {
-        $replacements = $this->module->config('stubs.replacements');
-
-        if (!isset($replacements[$stub])) {
-            return [];
-        }
-
-        $keys = $replacements[$stub];
-
-        $replaces = [];
-
-        if ($stub === 'json' || $stub === 'composer') {
-            if (in_array('PROVIDER_NAMESPACE', $keys, true) === false) {
-                $keys[] = 'PROVIDER_NAMESPACE';
-            }
-        }
-        foreach ($keys as $key) {
-            if (method_exists($this, $method = 'get' . ucfirst(Str::studly(strtolower($key))) . 'Replacement')) {
-                $replaces[$key] = $this->$method();
-            } else {
-                $replaces[$key] = null;
-            }
-        }
-
-        return $replaces;
+        return (new Stub('/' . $stub . '.stub'))->render();
     }
 
     /**
      * Generate the plugin.json file
      */
-    private function generateModuleJsonFile()
+    private function generatePluginJsonFile()
     {
         $path = $this->module->getPluginPath($this->getName()) . 'plugin.json';
 
