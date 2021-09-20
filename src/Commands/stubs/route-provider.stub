@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class $CLASS$ extends ServiceProvider
 {
     /**
-     * The module namespace to assume when generating URLs to actions.
+     * The plugin namespace to assume when generating URLs to actions.
      *
      * @var string
      */

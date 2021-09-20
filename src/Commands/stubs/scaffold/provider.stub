@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Factory;
 class $CLASS$ extends ServiceProvider
 {
     /**
-     * @var string $moduleName
+     * @var string $pluginName
      */
-    protected $moduleName = '$MODULE$';
+    protected $pluginName = '$PLUGIN$';
 
     /**
-     * @var string $moduleNameLower
+     * @var string $pluginNameLower
      */
-    protected $moduleNameLower = '$LOWER_NAME$';
+    protected $pluginNameLower = '$LOWER_NAME$';
 
     /**
      * Boot the application events.
@@ -27,7 +27,7 @@ class $CLASS$ extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(plugin_path($this->moduleName, '$MIGRATIONS_PATH$'));
+        $this->loadMigrationsFrom(plugin_path($this->pluginName, '$MIGRATIONS_PATH$'));
     }
 
     /**
@@ -48,10 +48,10 @@ class $CLASS$ extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            plugin_path($this->moduleName, '$PATH_CONFIG$/config.php') => config_path($this->moduleNameLower . '.php'),
+            plugin_path($this->pluginName, '$PATH_CONFIG$/config.php') => config_path($this->pluginNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            plugin_path($this->moduleName, '$PATH_CONFIG$/config.php'), $this->moduleNameLower
+            plugin_path($this->pluginName, '$PATH_CONFIG$/config.php'), $this->pluginNameLower
         );
     }
 
@@ -62,15 +62,15 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+        $viewPath = resource_path('views/plugins/' . $this->pluginNameLower);
 
-        $sourcePath = plugin_path($this->moduleName, '$PATH_VIEWS$');
+        $sourcePath = plugin_path($this->pluginName, '$PATH_VIEWS$');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ], ['views', $this->moduleNameLower . '-module-views']);
+        ], ['views', $this->pluginNameLower . '-plugin-views']);
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->pluginNameLower);
     }
 
     /**
@@ -80,12 +80,12 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
+        $langPath = resource_path('lang/plugins/' . $this->pluginNameLower);
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
+            $this->loadTranslationsFrom($langPath, $this->pluginNameLower);
         } else {
-            $this->loadTranslationsFrom(plugin_path($this->moduleName, '$PATH_LANG$'), $this->moduleNameLower);
+            $this->loadTranslationsFrom(plugin_path($this->pluginName, '$PATH_LANG$'), $this->pluginNameLower);
         }
     }
 
@@ -103,8 +103,8 @@ class $CLASS$ extends ServiceProvider
     {
         $paths = [];
         foreach (\Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
-                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            if (is_dir($path . '/plugins/' . $this->pluginNameLower)) {
+                $paths[] = $path . '/plugins/' . $this->pluginNameLower;
             }
         }
         return $paths;
