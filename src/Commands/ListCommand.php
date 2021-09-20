@@ -42,12 +42,12 @@ class ListCommand extends Command
         $rows = [];
 
         /** @var Plugin $plugin */
-        foreach ($this->getModules() as $module) {
+        foreach ($this->getModules() as $plugin) {
             $rows[] = [
-                $module->getName(),
-                $module->isEnabled() ? 'Enabled' : 'Disabled',
-                $module->get('priority'),
-                $module->getPath(),
+                $plugin->getName(),
+                $plugin->isEnabled() ? 'Enabled' : 'Disabled',
+                $plugin->get('priority'),
+                $plugin->getPath(),
             ];
         }
 

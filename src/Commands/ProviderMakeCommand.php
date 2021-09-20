@@ -37,9 +37,9 @@ class ProviderMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.provider.namespace') ?: $module->config('paths.generator.provider.path', 'Providers');
+        return $plugin->config('paths.generator.provider.namespace') ?: $plugin->config('paths.generator.provider.path', 'Providers');
     }
 
     /**
@@ -75,15 +75,15 @@ class ProviderMakeCommand extends GeneratorCommand
         $stub = $this->option('master') ? 'scaffold/provider' : 'provider';
 
         /** @var Plugin $plugin */
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/' . $stub . '.stub', [
-            'NAMESPACE'         => $this->getClassNamespace($module),
+            'NAMESPACE'         => $this->getClassNamespace($plugin),
             'CLASS'             => $this->getClass(),
-            'LOWER_NAME'        => $module->getLowerName(),
+            'LOWER_NAME'        => $plugin->getLowerName(),
             'MODULE'            => $this->getPluginName(),
             'NAME'              => $this->getFileName(),
-            'STUDLY_NAME'       => $module->getStudlyName(),
+            'STUDLY_NAME'       => $plugin->getStudlyName(),
             'MODULE_NAMESPACE'  => $this->laravel['plugins']->config('namespace'),
             'PATH_VIEWS'        => GenerateConfigReader::read('views')->getPath(),
             'PATH_LANG'         => GenerateConfigReader::read('lang')->getPath(),

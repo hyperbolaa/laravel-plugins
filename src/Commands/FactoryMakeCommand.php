@@ -51,10 +51,10 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/factory.stub', [
-            'NAMESPACE' => $this->getClassNamespace($module),
+            'NAMESPACE' => $this->getClassNamespace($plugin),
             'NAME' => $this->getModelName(),
             'MODEL_NAMESPACE' => $this->getModelNamespace(),
         ]))->render();
@@ -95,9 +95,9 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     public function getDefaultNamespace(): string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.factory.namespace') ?: $module->config('paths.generator.factory.path');
+        return $plugin->config('paths.generator.factory.namespace') ?: $plugin->config('paths.generator.factory.path');
     }
 
     /**

@@ -83,7 +83,7 @@ abstract class GeneratorCommand extends Command
      *
      * @return string
      */
-    public function getClassNamespace($module)
+    public function getClassNamespace($plugin)
     {
         $extra = str_replace($this->getClass(), '', $this->argument($this->argumentName));
 
@@ -91,7 +91,7 @@ abstract class GeneratorCommand extends Command
 
         $namespace = $this->laravel['plugins']->config('namespace');
 
-        $namespace .= '\\' . $module->getStudlyName();
+        $namespace .= '\\' . $plugin->getStudlyName();
 
         $namespace .= '\\' . $this->getDefaultNamespace();
 

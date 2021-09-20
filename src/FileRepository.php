@@ -184,8 +184,8 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $plugins = [];
 
-        foreach ($cached as $name => $module) {
-            $path = $module['path'];
+        foreach ($cached as $name => $plugin) {
+            $path = $plugin['path'];
 
             $plugins[$name] = $this->createPlugin($this->app, $name, $path);
         }
@@ -226,10 +226,10 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $plugins = [];
 
-        /** @var Module $module */
-        foreach ($this->all() as $name => $module) {
-            if ($module->isStatus($status)) {
-                $plugins[$name] = $module;
+        /** @var Module $plugin */
+        foreach ($this->all() as $name => $plugin) {
+            if ($plugin->isStatus($status)) {
+                $plugins[$name] = $plugin;
             }
         }
 
@@ -317,8 +317,8 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function register(): void
     {
-        foreach ($this->getOrdered() as $module) {
-            $module->register();
+        foreach ($this->getOrdered() as $plugin) {
+            $plugin->register();
         }
     }
 
@@ -327,8 +327,8 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function boot(): void
     {
-        foreach ($this->getOrdered() as $module) {
-            $module->boot();
+        foreach ($this->getOrdered() as $plugin) {
+            $plugin->boot();
         }
     }
 
@@ -337,9 +337,9 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function find(string $name)
     {
-        foreach ($this->all() as $module) {
-            if ($module->getLowerName() === strtolower($name)) {
-                return $module;
+        foreach ($this->all() as $plugin) {
+            if ($plugin->getLowerName() === strtolower($name)) {
+                return $plugin;
             }
         }
 
@@ -351,9 +351,9 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function findByAlias(string $alias)
     {
-        foreach ($this->all() as $module) {
-            if ($module->getAlias() === $alias) {
-                return $module;
+        foreach ($this->all() as $plugin) {
+            if ($plugin->getAlias() === $alias) {
+                return $plugin;
             }
         }
 
@@ -367,9 +367,9 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $requirements = [];
 
-        $module = $this->findOrFail($name);
+        $plugin = $this->findOrFail($name);
 
-        foreach ($module->getRequires() as $requirementName) {
+        foreach ($plugin->getRequires() as $requirementName) {
             $requirements[] = $this->findByAlias($requirementName);
         }
 
@@ -387,10 +387,10 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function findOrFail(string $name)
     {
-        $module = $this->find($name);
+        $plugin = $this->find($name);
 
-        if ($module !== null) {
-            return $module;
+        if ($plugin !== null) {
+            return $plugin;
         }
 
         throw new PluginNotFoundException("Module [{$name}] does not exist!");
@@ -411,25 +411,25 @@ abstract class FileRepository implements RepositoryInterface, Countable
     /**
      * Get plugin path for a specific plugin.
      *
-     * @param $module
+     * @param $plugin
      *
      * @return string
      */
-    public function getPluginPath($module)
+    public function getPluginPath($plugin)
     {
         try {
-            return $this->findOrFail($module)->getPath() . '/';
+            return $this->findOrFail($plugin)->getPath() . '/';
         } catch (PluginNotFoundException $e) {
-            return $this->getPath() . '/' . Str::studly($module) . '/';
+            return $this->getPath() . '/' . Str::studly($plugin) . '/';
         }
     }
 
     /**
      * @inheritDoc
      */
-    public function assetPath(string $module) : string
+    public function assetPath(string $plugin) : string
     {
-        return $this->config('paths.assets') . '/' . $module;
+        return $this->config('paths.assets') . '/' . $plugin;
     }
 
     /**
@@ -469,9 +469,9 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function setUsed($name)
     {
-        $module = $this->findOrFail($name);
+        $plugin = $this->findOrFail($name);
 
-        $this->getFiles()->put($this->getUsedStoragePath(), $module);
+        $this->getFiles()->put($this->getUsedStoragePath(), $plugin);
     }
 
     /**
@@ -583,11 +583,11 @@ abstract class FileRepository implements RepositoryInterface, Countable
     /**
      * Update dependencies for the specified plugin.
      *
-     * @param string $module
+     * @param string $plugin
      */
-    public function update($module)
+    public function update($plugin)
     {
-        with(new Updater($this))->update($module);
+        with(new Updater($this))->update($plugin);
     }
 
     /**

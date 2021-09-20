@@ -11,11 +11,11 @@ class Runner implements RunableInterface
      * The plugin instance.
      * @var RepositoryInterface
      */
-    protected $module;
+    protected $plugin;
 
-    public function __construct(RepositoryInterface $module)
+    public function __construct(RepositoryInterface $plugin)
     {
-        $this->plugin = $module;
+        $this->plugin = $plugin;
     }
 
     /**

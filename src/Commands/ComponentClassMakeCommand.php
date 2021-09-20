@@ -54,9 +54,9 @@ class ComponentClassMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.component-class.namespace') ?: $module->config('paths.generator.component-class.path', 'View/Component');
+        return $plugin->config('paths.generator.component-class.namespace') ?: $plugin->config('paths.generator.component-class.path', 'View/Component');
     }
 
     /**
@@ -76,12 +76,12 @@ class ComponentClassMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/component-class.stub', [
-            'NAMESPACE'         => $this->getClassNamespace($module),
+            'NAMESPACE'         => $this->getClassNamespace($plugin),
             'CLASS'             => $this->getClass(),
-            'LOWER_NAME'        => $module->getLowerName(),
+            'LOWER_NAME'        => $plugin->getLowerName(),
             'COMPONENT_NAME'    => 'components.' . Str::lower($this->argument('name')),
         ]))->render();
     }

@@ -53,18 +53,18 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub($this->getStubName(), [
-            'MODULENAME'        => $module->getStudlyName(),
+            'MODULENAME'        => $plugin->getStudlyName(),
             'CONTROLLERNAME'    => $this->getControllerName(),
-            'NAMESPACE'         => $module->getStudlyName(),
-            'CLASS_NAMESPACE'   => $this->getClassNamespace($module),
+            'NAMESPACE'         => $plugin->getStudlyName(),
+            'CLASS_NAMESPACE'   => $this->getClassNamespace($plugin),
             'CLASS'             => $this->getControllerNameWithoutNamespace(),
-            'LOWER_NAME'        => $module->getLowerName(),
+            'LOWER_NAME'        => $plugin->getLowerName(),
             'MODULE'            => $this->getPluginName(),
             'NAME'              => $this->getPluginName(),
-            'STUDLY_NAME'       => $module->getStudlyName(),
+            'STUDLY_NAME'       => $plugin->getStudlyName(),
             'MODULE_NAMESPACE'  => $this->laravel['plugins']->config('namespace'),
         ]))->render();
     }
@@ -117,9 +117,9 @@ class ControllerMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.controller.namespace') ?: $module->config('paths.generator.controller.path', 'Http/Controllers');
+        return $plugin->config('paths.generator.controller.namespace') ?: $plugin->config('paths.generator.controller.path', 'Http/Controllers');
     }
 
     /**

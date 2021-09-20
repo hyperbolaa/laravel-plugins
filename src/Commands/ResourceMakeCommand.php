@@ -19,9 +19,9 @@ class ResourceMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.resource.namespace') ?: $module->config('paths.generator.resource.path', 'Transformers');
+        return $plugin->config('paths.generator.resource.namespace') ?: $plugin->config('paths.generator.resource.path', 'Transformers');
     }
 
     /**
@@ -49,10 +49,10 @@ class ResourceMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub($this->getStubName(), [
-            'NAMESPACE' => $this->getClassNamespace($module),
+            'NAMESPACE' => $this->getClassNamespace($plugin),
             'CLASS'     => $this->getClass(),
         ]))->render();
     }

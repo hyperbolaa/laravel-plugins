@@ -44,8 +44,8 @@ class PublishCommand extends Command
      */
     public function publishAll()
     {
-        foreach ($this->laravel['plugins']->allEnabled() as $module) {
-            $this->publish($module);
+        foreach ($this->laravel['plugins']->allEnabled() as $plugin) {
+            $this->publish($plugin);
         }
     }
 
@@ -57,17 +57,17 @@ class PublishCommand extends Command
     public function publish($name)
     {
         if ($name instanceof Plugin) {
-            $module = $name;
+            $plugin = $name;
         } else {
-            $module = $this->laravel['plugins']->findOrFail($name);
+            $plugin = $this->laravel['plugins']->findOrFail($name);
         }
 
-        with(new AssetPublisher($module))
+        with(new AssetPublisher($plugin))
             ->setRepository($this->laravel['plugins'])
             ->setConsole($this)
             ->publish();
 
-        $this->line("<info>Published</info>: {$module->getStudlyName()}");
+        $this->line("<info>Published</info>: {$plugin->getStudlyName()}");
     }
 
     /**

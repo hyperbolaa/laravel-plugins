@@ -44,8 +44,8 @@ class PublishTranslationCommand extends Command
      */
     public function publishAll()
     {
-        foreach ($this->laravel['plugins']->allEnabled() as $module) {
-            $this->publish($module);
+        foreach ($this->laravel['plugins']->allEnabled() as $plugin) {
+            $this->publish($plugin);
         }
     }
 
@@ -57,17 +57,17 @@ class PublishTranslationCommand extends Command
     public function publish($name)
     {
         if ($name instanceof Plugin) {
-            $module = $name;
+            $plugin = $name;
         } else {
-            $module = $this->laravel['plugins']->findOrFail($name);
+            $plugin = $this->laravel['plugins']->findOrFail($name);
         }
 
-        with(new LangPublisher($module))
+        with(new LangPublisher($plugin))
             ->setRepository($this->laravel['plugins'])
             ->setConsole($this)
             ->publish();
 
-        $this->line("<info>Published</info>: {$module->getStudlyName()}");
+        $this->line("<info>Published</info>: {$plugin->getStudlyName()}");
     }
 
     /**
@@ -78,7 +78,7 @@ class PublishTranslationCommand extends Command
     protected function getArguments()
     {
         return [
-            ['plugin', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 }

@@ -9,17 +9,17 @@ class Updater extends Runner
     /**
      * Update the dependencies for the specified plugin by given the plugin name.
      *
-     * @param string $module
+     * @param string $plugin
      */
-    public function update($module)
+    public function update($plugin)
     {
-        $module = $this->plugin->findOrFail($module);
+        $plugin = $this->plugin->findOrFail($plugin);
 
         chdir(base_path());
 
-        $this->installRequires($module);
-        $this->installDevRequires($module);
-        $this->copyScriptsToMainComposerJson($module);
+        $this->installRequires($plugin);
+        $this->installDevRequires($plugin);
+        $this->copyScriptsToMainComposerJson($plugin);
     }
 
     /**
@@ -37,7 +37,7 @@ class Updater extends Runner
      */
     private function installRequires(Plugin $plugin)
     {
-        $packages = $module->getComposerAttr('require', []);
+        $packages = $plugin->getComposerAttr('require', []);
 
         $concatenatedPackages = '';
         foreach ($packages as $name => $version) {
@@ -54,7 +54,7 @@ class Updater extends Runner
      */
     private function installDevRequires(Plugin $plugin)
     {
-        $devPackages = $module->getComposerAttr('require-dev', []);
+        $devPackages = $plugin->getComposerAttr('require-dev', []);
 
         $concatenatedPackages = '';
         foreach ($devPackages as $name => $version) {
@@ -71,7 +71,7 @@ class Updater extends Runner
      */
     private function copyScriptsToMainComposerJson(Plugin $plugin)
     {
-        $scripts = $module->getComposerAttr('scripts', []);
+        $scripts = $plugin->getComposerAttr('scripts', []);
 
         $composer = json_decode(file_get_contents(base_path('composer.json')), true);
 

@@ -35,9 +35,9 @@ class RuleMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.rules.namespace') ?: $module->config('paths.generator.rules.path', 'Rules');
+        return $plugin->config('paths.generator.rules.namespace') ?: $plugin->config('paths.generator.rules.path', 'Rules');
     }
 
     /**
@@ -58,10 +58,10 @@ class RuleMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/rule.stub', [
-            'NAMESPACE' => $this->getClassNamespace($module),
+            'NAMESPACE' => $this->getClassNamespace($plugin),
             'CLASS'     => $this->getFileName(),
         ]))->render();
     }

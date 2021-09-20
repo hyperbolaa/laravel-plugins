@@ -37,14 +37,14 @@ class EnableCommand extends Command
         }
 
         /** @var Plugin $plugin */
-        $module = $this->laravel['plugins']->findOrFail($this->argument('plugin'));
+        $plugin = $this->laravel['plugins']->findOrFail($this->argument('plugin'));
 
-        if ($module->isDisabled()) {
-            $module->enable();
+        if ($plugin->isDisabled()) {
+            $plugin->enable();
 
-            $this->info("Module [{$module}] enabled successful.");
+            $this->info("Module [{$plugin}] enabled successful.");
         } else {
-            $this->comment("Module [{$module}] has already enabled.");
+            $this->comment("Module [{$plugin}] has already enabled.");
         }
 
         return 0;
@@ -57,16 +57,16 @@ class EnableCommand extends Command
      */
     public function enableAll()
     {
-        /** @var Plugin $modules */
-        $modules = $this->laravel['plugins']->all();
+        /** @var Plugin $plugins */
+        $plugins = $this->laravel['plugins']->all();
 
-        foreach ($modules as $module) {
-            if ($module->isDisabled()) {
-                $module->enable();
+        foreach ($plugins as $plugin) {
+            if ($plugin->isDisabled()) {
+                $plugin->enable();
 
-                $this->info("Module [{$module}] enabled successful.");
+                $this->info("Module [{$plugin}] enabled successful.");
             } else {
-                $this->comment("Module [{$module}] has already enabled.");
+                $this->comment("Module [{$plugin}] has already enabled.");
             }
         }
     }

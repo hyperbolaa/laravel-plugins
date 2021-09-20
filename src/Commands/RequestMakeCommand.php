@@ -35,9 +35,9 @@ class RequestMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.request.namespace') ?: $module->config('paths.generator.request.path', 'Http/Requests');
+        return $plugin->config('paths.generator.request.namespace') ?: $plugin->config('paths.generator.request.path', 'Http/Requests');
     }
 
     /**
@@ -58,10 +58,10 @@ class RequestMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/request.stub', [
-            'NAMESPACE' => $this->getClassNamespace($module),
+            'NAMESPACE' => $this->getClassNamespace($plugin),
             'CLASS'     => $this->getClass(),
         ]))->render();
     }

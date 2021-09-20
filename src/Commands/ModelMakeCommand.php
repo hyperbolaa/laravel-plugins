@@ -126,16 +126,16 @@ class ModelMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/model.stub', [
             'NAME'              => $this->getModelName(),
             'FILLABLE'          => $this->getFillable(),
-            'NAMESPACE'         => $this->getClassNamespace($module),
+            'NAMESPACE'         => $this->getClassNamespace($plugin),
             'CLASS'             => $this->getClass(),
-            'LOWER_NAME'        => $module->getLowerName(),
+            'LOWER_NAME'        => $plugin->getLowerName(),
             'MODULE'            => $this->getPluginName(),
-            'STUDLY_NAME'       => $module->getStudlyName(),
+            'STUDLY_NAME'       => $plugin->getStudlyName(),
             'MODULE_NAMESPACE'  => $this->laravel['plugins']->config('namespace'),
         ]))->render();
     }
@@ -183,8 +183,8 @@ class ModelMakeCommand extends GeneratorCommand
      */
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.model.namespace') ?: $module->config('paths.generator.model.path', 'Entities');
+        return $plugin->config('paths.generator.model.namespace') ?: $plugin->config('paths.generator.model.path', 'Entities');
     }
 }

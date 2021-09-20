@@ -19,13 +19,13 @@ class TestMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
         if ($this->option('feature')) {
-            return $module->config('paths.generator.test-feature.namespace') ?: $module->config('paths.generator.test-feature.path', 'Tests/Feature');
+            return $plugin->config('paths.generator.test-feature.namespace') ?: $plugin->config('paths.generator.test-feature.path', 'Tests/Feature');
         }
 
-        return $module->config('paths.generator.test.namespace') ?: $module->config('paths.generator.test.path', 'Tests/Unit');
+        return $plugin->config('paths.generator.test.namespace') ?: $plugin->config('paths.generator.test.path', 'Tests/Unit');
     }
 
     /**
@@ -58,7 +58,7 @@ class TestMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
         $stub = '/unit-test.stub';
 
         if ($this->option('feature')) {
@@ -66,7 +66,7 @@ class TestMakeCommand extends GeneratorCommand
         }
 
         return (new Stub($stub, [
-            'NAMESPACE' => $this->getClassNamespace($module),
+            'NAMESPACE' => $this->getClassNamespace($plugin),
             'CLASS'     => $this->getClass(),
         ]))->render();
     }

@@ -28,24 +28,24 @@ class DumpCommand extends Command
     {
         $this->info('Generating optimized autoload plugins.');
 
-        if ($module = $this->argument('plugin')) {
-            $this->dump($module);
+        if ($plugin = $this->argument('plugin')) {
+            $this->dump($plugin);
         } else {
-            foreach ($this->laravel['plugins']->all() as $module) {
-                $this->dump($module->getStudlyName());
+            foreach ($this->laravel['plugins']->all() as $plugin) {
+                $this->dump($plugin->getStudlyName());
             }
         }
 
         return 0;
     }
 
-    public function dump($module)
+    public function dump($plugin)
     {
-        $module = $this->laravel['plugins']->findOrFail($module);
+        $plugin = $this->laravel['plugins']->findOrFail($plugin);
 
-        $this->line("<comment>Running for plugin</comment>: {$module}");
+        $this->line("<comment>Running for plugin</comment>: {$plugin}");
 
-        chdir($module->getPath());
+        chdir($plugin->getPath());
 
         passthru('composer dump -o -n -q');
     }

@@ -53,7 +53,7 @@ class PluginGenerator extends Generator
      *
      * @var \Hyperbolaa\Plugins\Plugin
      */
-    protected $module;
+    protected $plugin;
 
     /**
      * Force status.
@@ -79,14 +79,14 @@ class PluginGenerator extends Generator
     /**
      * The constructor.
      * @param $name
-     * @param FileRepository $module
+     * @param FileRepository $plugin
      * @param Config     $config
      * @param Filesystem $filesystem
      * @param Console    $console
      */
     public function __construct(
         $name,
-        FileRepository $module = null,
+        FileRepository $plugin = null,
         Config $config = null,
         Filesystem $filesystem = null,
         Console $console = null,
@@ -96,7 +96,7 @@ class PluginGenerator extends Generator
         $this->config = $config;
         $this->filesystem = $filesystem;
         $this->console = $console;
-        $this->plugin = $module;
+        $this->plugin = $plugin;
         $this->activator = $activator;
     }
 
@@ -237,13 +237,13 @@ class PluginGenerator extends Generator
     /**
      * Set the plugin instance.
      *
-     * @param mixed $module
+     * @param mixed $plugin
      *
      * @return $this
      */
-    public function setModule($module)
+    public function setModule($plugin)
     {
-        $this->plugin = $module;
+        $this->plugin = $plugin;
 
         return $this;
     }

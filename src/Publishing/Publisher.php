@@ -14,7 +14,7 @@ abstract class Publisher implements PublisherInterface
      *
      * @var string
      */
-    protected $module;
+    protected $plugin;
 
     /**
      * The plugins repository instance.
@@ -57,7 +57,7 @@ abstract class Publisher implements PublisherInterface
      */
     public function __construct(Plugin $plugin)
     {
-        $this->plugin = $module;
+        $this->plugin = $plugin;
     }
 
     /**

@@ -148,18 +148,18 @@ interface RepositoryInterface
     /**
      * Get asset path for a specific plugin.
      *
-     * @param string $module
+     * @param string $plugin
      * @return string
      */
-    public function assetPath(string $module): string;
+    public function assetPath(string $plugin): string;
 
     /**
      * Delete a specific plugin.
-     * @param string $module
+     * @param string $plugin
      * @return bool
      * @throws \Hyperbolaa\Plugins\Exceptions\PluginNotFoundException
      */
-    public function delete(string $module): bool;
+    public function delete(string $plugin): bool;
 
     /**
      * Determine whether the given plugin is activated.

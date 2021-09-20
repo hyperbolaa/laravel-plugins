@@ -62,17 +62,17 @@ class InstallCommand extends Command
             return E_ERROR;
         }
 
-        $modules = Json::make($path);
+        $plugins = Json::make($path);
 
-        $dependencies = $modules->get('require', []);
+        $dependencies = $plugins->get('require', []);
 
-        foreach ($dependencies as $module) {
-            $module = collect($module);
+        foreach ($dependencies as $plugin) {
+            $plugin = collect($plugin);
 
             $this->install(
-                $module->get('name'),
-                $module->get('version'),
-                $module->get('type')
+                $plugin->get('name'),
+                $plugin->get('version'),
+                $plugin->get('type')
             );
         }
 

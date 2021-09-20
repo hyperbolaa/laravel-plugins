@@ -28,38 +28,38 @@ class PublishConfigurationCommand extends Command
      */
     public function handle() : int
     {
-        if ($module = $this->argument('plugin')) {
-            $this->publishConfiguration($module);
+        if ($plugin = $this->argument('plugin')) {
+            $this->publishConfiguration($plugin);
 
             return 0;
         }
 
-        foreach ($this->laravel['plugins']->allEnabled() as $module) {
-            $this->publishConfiguration($module->getName());
+        foreach ($this->laravel['plugins']->allEnabled() as $plugin) {
+            $this->publishConfiguration($plugin->getName());
         }
 
         return 0;
     }
 
     /**
-     * @param string $module
+     * @param string $plugin
      * @return string
      */
-    private function getServiceProviderForModule($module)
+    private function getServiceProviderForModule($plugin)
     {
         $namespace = $this->laravel['config']->get('plugins.namespace');
-        $studlyName = Str::studly($module);
+        $studlyName = Str::studly($plugin);
 
         return "$namespace\\$studlyName\\Providers\\{$studlyName}ServiceProvider";
     }
 
     /**
-     * @param string $module
+     * @param string $plugin
      */
-    private function publishConfiguration($module)
+    private function publishConfiguration($plugin)
     {
         $this->call('vendor:publish', [
-            '--provider' => $this->getServiceProviderForModule($module),
+            '--provider' => $this->getServiceProviderForModule($plugin),
             '--force' => $this->option('force'),
             '--tag' => ['config'],
         ]);

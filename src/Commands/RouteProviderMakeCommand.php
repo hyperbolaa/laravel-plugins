@@ -54,17 +54,17 @@ class RouteProviderMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['plugins']->findOrFail($this->getPluginName());
+        $plugin = $this->laravel['plugins']->findOrFail($this->getPluginName());
 
         return (new Stub('/route-provider.stub', [
-            'NAMESPACE'            => $this->getClassNamespace($module),
+            'NAMESPACE'            => $this->getClassNamespace($plugin),
             'CLASS'                => $this->getFileName(),
             'MODULE_NAMESPACE'     => $this->laravel['plugins']->config('namespace'),
             'MODULE'               => $this->getPluginName(),
             'CONTROLLER_NAMESPACE' => $this->getControllerNameSpace(),
             'WEB_ROUTES_PATH'      => $this->getWebRoutesPath(),
             'API_ROUTES_PATH'      => $this->getApiRoutesPath(),
-            'LOWER_NAME'           => $module->getLowerName(),
+            'LOWER_NAME'           => $plugin->getLowerName(),
         ]))->render();
     }
 
@@ -108,9 +108,9 @@ class RouteProviderMakeCommand extends GeneratorCommand
 
     public function getDefaultNamespace() : string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.provider.namespace') ?: $module->config('paths.generator.provider.path', 'Providers');
+        return $plugin->config('paths.generator.provider.namespace') ?: $plugin->config('paths.generator.provider.path', 'Providers');
     }
 
     /**
@@ -118,8 +118,8 @@ class RouteProviderMakeCommand extends GeneratorCommand
      */
     private function getControllerNameSpace(): string
     {
-        $module = $this->laravel['plugins'];
+        $plugin = $this->laravel['plugins'];
 
-        return str_replace('/', '\\', $module->config('paths.generator.controller.namespace') ?: $module->config('paths.generator.controller.path', 'Controller'));
+        return str_replace('/', '\\', $plugin->config('paths.generator.controller.namespace') ?: $plugin->config('paths.generator.controller.path', 'Controller'));
     }
 }
