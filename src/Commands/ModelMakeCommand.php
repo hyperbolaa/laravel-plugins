@@ -25,7 +25,7 @@ class ModelMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-model';
+    protected $name = 'plugin:make-model';
 
     /**
      * The console command description.
@@ -102,7 +102,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         if ($this->option('migration') === true) {
             $migrationName = 'create_' . $this->createMigrationName() . '_table';
-            $this->call('module:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
+            $this->call('plugin:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
         }
     }
 
@@ -114,7 +114,7 @@ class ModelMakeCommand extends GeneratorCommand
         if ($this->option('controller') === true) {
             $controllerName = "{$this->getModelName()}Controller";
 
-            $this->call('module:make-controller', array_filter([
+            $this->call('plugin:make-controller', array_filter([
                 'controller' => $controllerName,
                 'module' => $this->argument('module')
             ]));
