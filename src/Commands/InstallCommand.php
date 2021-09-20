@@ -112,7 +112,7 @@ class InstallCommand extends Command
 
         if (!$this->option('no-update')) {
             $this->call('module:update', [
-                'module' => $installer->getModuleName(),
+                'module' => $installer->getPluginName(),
             ]);
         }
     }

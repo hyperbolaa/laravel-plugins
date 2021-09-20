@@ -58,7 +58,7 @@ class TestMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
         $stub = '/unit-test.stub';
 
         if ($this->option('feature')) {
@@ -76,7 +76,7 @@ class TestMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
+        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
 
         if ($this->option('feature')) {
             $testPath = GenerateConfigReader::read('test-feature');

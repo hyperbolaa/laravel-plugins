@@ -60,7 +60,7 @@ class ComponentViewMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
+        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
         $factoryPath = GenerateConfigReader::read('component-view');
 
         return $path . $factoryPath->getPath() . '/' . $this->getFileName();

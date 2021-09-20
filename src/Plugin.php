@@ -220,7 +220,7 @@ abstract class Plugin
     public function json($file = null) : Json
     {
         if ($file === null) {
-            $file = 'module.json';
+            $file = 'plugin.json';
         }
 
         return Arr::get($this->moduleJson, $file, function () use ($file) {

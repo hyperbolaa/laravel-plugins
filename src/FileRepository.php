@@ -28,7 +28,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     protected $app;
 
     /**
-     * The module path.
+     * The plugin path.
      *
      * @var string|null
      */
@@ -78,7 +78,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Add other module location.
+     * Add other plugin location.
      *
      * @param string $path
      *
@@ -102,7 +102,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get scanned modules paths.
+     * Get scanned plugins paths.
      *
      * @return array
      */
@@ -124,7 +124,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Creates a new Module instance
+     * Creates a new Plugin instance
      *
      * @param Container $app
      * @param string $args
@@ -134,7 +134,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     abstract protected function createModule(...$args);
 
     /**
-     * Get & scan all modules.
+     * Get & scan all plugins.
      *
      * @return array
      */
@@ -142,21 +142,21 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $paths = $this->getScanPaths();
 
-        $modules = [];
+        $plugins = [];
 
         foreach ($paths as $key => $path) {
-            $manifests = $this->getFiles()->glob("{$path}/module.json");
+            $manifests = $this->getFiles()->glob("{$path}/plugin.json");
 
             is_array($manifests) || $manifests = [];
 
             foreach ($manifests as $manifest) {
                 $name = Json::make($manifest)->get('name');
 
-                $modules[$name] = $this->createModule($this->app, $name, dirname($manifest));
+                $plugins[$name] = $this->createModule($this->app, $name, dirname($manifest));
             }
         }
 
-        return $modules;
+        return $plugins;
     }
 
     /**
@@ -182,15 +182,15 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     protected function formatCached($cached)
     {
-        $modules = [];
+        $plugins = [];
 
         foreach ($cached as $name => $module) {
             $path = $module['path'];
 
-            $modules[$name] = $this->createModule($this->app, $name, $path);
+            $plugins[$name] = $this->createModule($this->app, $name, $path);
         }
 
-        return $modules;
+        return $plugins;
     }
 
     /**
@@ -224,16 +224,16 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function getByStatus($status) : array
     {
-        $modules = [];
+        $plugins = [];
 
         /** @var Module $module */
         foreach ($this->all() as $name => $module) {
             if ($module->isStatus($status)) {
-                $modules[$name] = $module;
+                $plugins[$name] = $module;
             }
         }
 
-        return $modules;
+        return $plugins;
     }
 
     /**
@@ -287,9 +287,9 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function getOrdered($direction = 'asc') : array
     {
-        $modules = $this->allEnabled();
+        $plugins = $this->allEnabled();
 
-        uasort($modules, function (Module $a, Module $b) use ($direction) {
+        uasort($plugins, function (Module $a, Module $b) use ($direction) {
             if ($a->get('priority') === $b->get('priority')) {
                 return 0;
             }
@@ -301,7 +301,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             return $a->get('priority') > $b->get('priority') ? 1 : -1;
         });
 
-        return $modules;
+        return $plugins;
     }
 
     /**
@@ -415,7 +415,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      *
      * @return string
      */
-    public function getModulePath($module)
+    public function getPluginPath($module)
     {
         try {
             return $this->findOrFail($module)->getPath() . '/';

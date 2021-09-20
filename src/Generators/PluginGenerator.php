@@ -331,7 +331,7 @@ class PluginGenerator extends Generator
                 continue;
             }
 
-            $path = $this->module->getModulePath($this->getName()) . '/' . $folder->getPath();
+            $path = $this->module->getPluginPath($this->getName()) . '/' . $folder->getPath();
 
             $this->filesystem->makeDirectory($path, 0755, true);
             if (config('plugins.stubs.gitkeep')) {
@@ -356,7 +356,7 @@ class PluginGenerator extends Generator
     public function generateFiles()
     {
         foreach ($this->getFiles() as $stub => $file) {
-            $path = $this->module->getModulePath($this->getName()) . $file;
+            $path = $this->module->getPluginPath($this->getName()) . $file;
 
             if (!$this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
@@ -461,11 +461,11 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Generate the module.json file
+     * Generate the plugin.json file
      */
     private function generateModuleJsonFile()
     {
-        $path = $this->module->getModulePath($this->getName()) . 'module.json';
+        $path = $this->module->getPluginPath($this->getName()) . 'plugin.json';
 
         if (!$this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0775, true);
@@ -477,15 +477,15 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Remove the default service provider that was added in the module.json file
+     * Remove the default service provider that was added in the plugin.json file
      * This is needed when a --plain module was created
      */
     private function cleanModuleJsonFile()
     {
-        $path = $this->module->getModulePath($this->getName()) . 'module.json';
+        $path = $this->module->getPluginPath($this->getName()) . 'plugin.json';
 
         $content = $this->filesystem->get($path);
-        $namespace = $this->getModuleNamespaceReplacement();
+        $namespace = $this->getPluginNamespaceReplacement();
         $studlyName = $this->getStudlyNameReplacement();
 
         $provider = '"' . $namespace . '\\\\' . $studlyName . '\\\\Providers\\\\' . $studlyName . 'ServiceProvider"';
@@ -530,7 +530,7 @@ class PluginGenerator extends Generator
      *
      * @return string
      */
-    protected function getModuleNamespaceReplacement()
+    protected function getPluginNamespaceReplacement()
     {
         return str_replace('\\', '\\\\', $this->module->config('namespace'));
     }

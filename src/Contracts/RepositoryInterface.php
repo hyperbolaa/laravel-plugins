@@ -105,7 +105,7 @@ interface RepositoryInterface
      */
     public function findOrFail(string $name);
 
-    public function getModulePath($moduleName);
+    public function getPluginPath($moduleName);
 
     /**
      * @return \Illuminate\Filesystem\Filesystem

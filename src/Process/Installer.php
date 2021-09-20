@@ -177,7 +177,7 @@ class Installer
             return $this->path;
         }
 
-        return $this->repository->getModulePath($this->getModuleName());
+        return $this->repository->getPluginPath($this->getPluginName());
     }
 
     /**
@@ -233,7 +233,7 @@ class Installer
      *
      * @return string
      */
-    public function getModuleName()
+    public function getPluginName()
     {
         $parts = explode('/', $this->name);
 
@@ -281,10 +281,10 @@ class Installer
         return Process::fromShellCommandline(sprintf(
             'cd %s && git remote add %s %s && git subtree add --prefix=%s --squash %s %s',
             base_path(),
-            $this->getModuleName(),
+            $this->getPluginName(),
             $this->getRepoUrl(),
             $this->getDestinationPath(),
-            $this->getModuleName(),
+            $this->getPluginName(),
             $this->getBranch()
         ));
     }

@@ -71,7 +71,7 @@ class CommandMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
 
         return (new Stub('/command.stub', [
             'COMMAND_NAME' => $this->getCommandName(),
@@ -93,7 +93,7 @@ class CommandMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
+        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
 
         $commandPath = GenerateConfigReader::read('command');
 

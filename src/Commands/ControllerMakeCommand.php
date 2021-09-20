@@ -41,7 +41,7 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     public function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
+        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
 
         $controllerPath = GenerateConfigReader::read('controller');
 
@@ -53,7 +53,7 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
 
         return (new Stub($this->getStubName(), [
             'MODULENAME'        => $module->getStudlyName(),
@@ -62,8 +62,8 @@ class ControllerMakeCommand extends GeneratorCommand
             'CLASS_NAMESPACE'   => $this->getClassNamespace($module),
             'CLASS'             => $this->getControllerNameWithoutNamespace(),
             'LOWER_NAME'        => $module->getLowerName(),
-            'MODULE'            => $this->getModuleName(),
-            'NAME'              => $this->getModuleName(),
+            'MODULE'            => $this->getPluginName(),
+            'NAME'              => $this->getPluginName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
         ]))->render();

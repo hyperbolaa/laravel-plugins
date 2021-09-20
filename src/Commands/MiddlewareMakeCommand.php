@@ -58,7 +58,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
 
         return (new Stub('/middleware.stub', [
             'NAMESPACE' => $this->getClassNamespace($module),
@@ -71,7 +71,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
+        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
 
         $middlewarePath = GenerateConfigReader::read('filter');
 

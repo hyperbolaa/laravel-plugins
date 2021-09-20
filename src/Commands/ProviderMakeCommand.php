@@ -75,13 +75,13 @@ class ProviderMakeCommand extends GeneratorCommand
         $stub = $this->option('master') ? 'scaffold/provider' : 'provider';
 
         /** @var Plugin $module */
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $module = $this->laravel['modules']->findOrFail($this->getPluginName());
 
         return (new Stub('/' . $stub . '.stub', [
             'NAMESPACE'         => $this->getClassNamespace($module),
             'CLASS'             => $this->getClass(),
             'LOWER_NAME'        => $module->getLowerName(),
-            'MODULE'            => $this->getModuleName(),
+            'MODULE'            => $this->getPluginName(),
             'NAME'              => $this->getFileName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
@@ -98,7 +98,7 @@ class ProviderMakeCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath()
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
+        $path = $this->laravel['modules']->getPluginPath($this->getPluginName());
 
         $generatorPath = GenerateConfigReader::read('provider');
 
