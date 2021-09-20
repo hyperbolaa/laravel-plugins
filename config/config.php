@@ -7,10 +7,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Module Namespace
+    | Plugin Namespace
     |--------------------------------------------------------------------------
     |
-    | Default module namespace.
+    | Default plugin namespace.
     |
     */
 
@@ -18,10 +18,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Module Stubs
+    | Plugin Stubs
     |--------------------------------------------------------------------------
     |
-    | Default module stubs.
+    | Default plugin stubs.
     |
     */
 
@@ -38,44 +38,26 @@ return [
             'assets/js/app' => 'Resources/assets/js/app.js',
             'assets/css/app' => 'Resources/assets/css/app.scss',
         ],
-        'replacements' => [
-            'routes/web' => ['LOWER_NAME', 'STUDLY_NAME'],
-            'routes/api' => ['LOWER_NAME'],
-            'webpack' => ['LOWER_NAME'],
-            'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],
-            'views/index' => ['LOWER_NAME'],
-            'views/master' => ['LOWER_NAME', 'STUDLY_NAME'],
-            'scaffold/config' => ['STUDLY_NAME'],
-            'composer' => [
-                'LOWER_NAME',
-                'STUDLY_NAME',
-                'VENDOR',
-                'AUTHOR_NAME',
-                'AUTHOR_EMAIL',
-                'MODULE_NAMESPACE',
-                'PROVIDER_NAMESPACE',
-            ],
-        ],
         'gitkeep' => true,
     ],
     'paths' => [
         /*
         |--------------------------------------------------------------------------
-        | Modules path
+        | Plugins path
         |--------------------------------------------------------------------------
         |
-        | This path used for save the generated module. This path also will be added
+        | This path used for save the generated plugin. This path also will be added
         | automatically to list of scanned folders.
         |
         */
 
-        'modules' => base_path('Plugins'),
+        'plugins' => base_path('Plugins'),
         /*
         |--------------------------------------------------------------------------
-        | Modules assets path
+        | Plugins assets path
         |--------------------------------------------------------------------------
         |
-        | Here you may update the modules assets path.
+        | Here you may update the plugins assets path.
         |
         */
 
@@ -134,8 +116,8 @@ return [
         Commands\RouteProviderMakeCommand::class,
         Commands\InstallCommand::class,
         Commands\ListCommand::class,
-        Commands\ModuleDeleteCommand::class,
-        Commands\ModuleMakeCommand::class,
+        Commands\PluginDeleteCommand::class,
+        Commands\PluginMakeCommand::class,
         Commands\FactoryMakeCommand::class,
         Commands\RequestMakeCommand::class,
         Commands\RuleMakeCommand::class,
@@ -202,7 +184,7 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
-    | Choose what laravel-modules will register as custom namespaces.
+    | Choose what laravel-plugins will register as custom namespaces.
     | Setting one to false will require you to register that part
     | in your own Service Provider class.
     |--------------------------------------------------------------------------
@@ -226,12 +208,12 @@ return [
     |
     | You can define new types of activators here, file, database etc. The only
     | required parameter is 'class'.
-    | The file activator will store the activation status in storage/installed_modules
+    | The file activator will store the activation status in storage/installed_plugins
     */
     'activators' => [
         'file' => [
             'class' => FileActivator::class,
-            'statuses-file' => base_path('modules_statuses.json'),
+            'statuses-file' => base_path('plugins_statuses.json'),
             'cache-key' => 'activator.installed',
             'cache-lifetime' => 604800,
         ],
