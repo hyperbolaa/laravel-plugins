@@ -14,7 +14,7 @@ use Hyperbolaa\Plugins\Support\Stub;
 class PluginGenerator extends Generator
 {
     /**
-     * The module name will created.
+     * The plugin name will created.
      *
      * @var string
      */
@@ -49,7 +49,7 @@ class PluginGenerator extends Generator
     protected $activator;
 
     /**
-     * The module instance.
+     * The plugin instance.
      *
      * @var \Hyperbolaa\Plugins\Plugin
      */
@@ -63,14 +63,14 @@ class PluginGenerator extends Generator
     protected $force = false;
 
     /**
-     * set default module type.
+     * set default plugin type.
      *
      * @var string
      */
     protected $type = 'web';
 
     /**
-     * Enables the module.
+     * Enables the plugin.
      *
      * @var bool
      */
@@ -96,7 +96,7 @@ class PluginGenerator extends Generator
         $this->config = $config;
         $this->filesystem = $filesystem;
         $this->console = $console;
-        $this->module = $module;
+        $this->plugin = $module;
         $this->activator = $activator;
     }
 
@@ -129,7 +129,7 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Get the name of module will created. By default in studly case.
+     * Get the name of plugin will created. By default in studly case.
      *
      * @return string
      */
@@ -225,17 +225,17 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Get the module instance.
+     * Get the plugin instance.
      *
      * @return \Hyperbolaa\Plugins\Plugin
      */
     public function getModule()
     {
-        return $this->module;
+        return $this->plugin;
     }
 
     /**
-     * Set the module instance.
+     * Set the plugin instance.
      *
      * @param mixed $module
      *
@@ -243,7 +243,7 @@ class PluginGenerator extends Generator
      */
     public function setModule($module)
     {
-        $this->module = $module;
+        $this->plugin = $module;
 
         return $this;
     }
@@ -255,7 +255,7 @@ class PluginGenerator extends Generator
      */
     public function getFolders()
     {
-        return $this->module->config('paths.generator');
+        return $this->plugin->config('paths.generator');
     }
 
     /**
@@ -265,7 +265,7 @@ class PluginGenerator extends Generator
      */
     public function getFiles()
     {
-        return $this->module->config('stubs.files');
+        return $this->plugin->config('stubs.files');
     }
 
     /**
@@ -283,15 +283,15 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Generate the module.
+     * Generate the plugin.
      */
     public function generate() : int
     {
         $name = $this->getName();
 
-        if ($this->module->has($name)) {
+        if ($this->plugin->has($name)) {
             if ($this->force) {
-                $this->module->delete($name);
+                $this->plugin->delete($name);
             } else {
                 $this->console->error("Module [{$name}] already exist!");
 
@@ -331,7 +331,7 @@ class PluginGenerator extends Generator
                 continue;
             }
 
-            $path = $this->module->getPluginPath($this->getName()) . '/' . $folder->getPath();
+            $path = $this->plugin->getPluginPath($this->getName()) . '/' . $folder->getPath();
 
             $this->filesystem->makeDirectory($path, 0755, true);
             if (config('plugins.stubs.gitkeep')) {
@@ -356,7 +356,7 @@ class PluginGenerator extends Generator
     public function generateFiles()
     {
         foreach ($this->getFiles() as $stub => $file) {
-            $path = $this->module->getPluginPath($this->getName()) . $file;
+            $path = $this->plugin->getPluginPath($this->getName()) . $file;
 
             if (!$this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
@@ -374,29 +374,29 @@ class PluginGenerator extends Generator
     public function generateResources()
     {
         if (GenerateConfigReader::read('seeder')->generate() === true) {
-            $this->console->call('module:make-seed', [
+            $this->console->call('plugin:make-seed', [
                 'name' => $this->getName(),
-                'module' => $this->getName(),
+                'plugin' => $this->getName(),
                 '--master' => true,
             ]);
         }
 
         if (GenerateConfigReader::read('provider')->generate() === true) {
-            $this->console->call('module:make-provider', [
+            $this->console->call('plugin:make-provider', [
                 'name' => $this->getName() . 'ServiceProvider',
-                'module' => $this->getName(),
+                'plugin' => $this->getName(),
                 '--master' => true,
             ]);
-            $this->console->call('module:route-provider', [
-                'module' => $this->getName(),
+            $this->console->call('plugin:route-provider', [
+                'plugin' => $this->getName(),
             ]);
         }
 
         if (GenerateConfigReader::read('controller')->generate() === true) {
             $options = $this->type=='api'?['--api'=>true]:[];
-            $this->console->call('module:make-controller', [
+            $this->console->call('plugin:make-controller', [
                 'controller' => $this->getName() . 'Controller',
-                'module' => $this->getName(),
+                'plugin' => $this->getName(),
             ]+$options);
         }
     }
@@ -418,7 +418,7 @@ class PluginGenerator extends Generator
      */
     private function generatePluginJsonFile()
     {
-        $path = $this->module->getPluginPath($this->getName()) . 'plugin.json';
+        $path = $this->plugin->getPluginPath($this->getName()) . 'plugin.json';
 
         if (!$this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0775, true);
@@ -431,11 +431,11 @@ class PluginGenerator extends Generator
 
     /**
      * Remove the default service provider that was added in the plugin.json file
-     * This is needed when a --plain module was created
+     * This is needed when a --plain plugin was created
      */
     private function cleanModuleJsonFile()
     {
-        $path = $this->module->getPluginPath($this->getName()) . 'plugin.json';
+        $path = $this->plugin->getPluginPath($this->getName()) . 'plugin.json';
 
         $content = $this->filesystem->get($path);
         $namespace = $this->getPluginNamespaceReplacement();
@@ -449,7 +449,7 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Get the module name in lower case.
+     * Get the plugin name in lower case.
      *
      * @return string
      */
@@ -459,7 +459,7 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Get the module name in studly case.
+     * Get the plugin name in studly case.
      *
      * @return string
      */
@@ -475,7 +475,7 @@ class PluginGenerator extends Generator
      */
     protected function getVendorReplacement()
     {
-        return $this->module->config('composer.vendor');
+        return $this->plugin->config('composer.vendor');
     }
 
     /**
@@ -485,7 +485,7 @@ class PluginGenerator extends Generator
      */
     protected function getPluginNamespaceReplacement()
     {
-        return str_replace('\\', '\\\\', $this->module->config('namespace'));
+        return str_replace('\\', '\\\\', $this->plugin->config('namespace'));
     }
 
     /**
@@ -495,7 +495,7 @@ class PluginGenerator extends Generator
      */
     protected function getAuthorNameReplacement()
     {
-        return $this->module->config('composer.author.name');
+        return $this->plugin->config('composer.author.name');
     }
 
     /**
@@ -505,7 +505,7 @@ class PluginGenerator extends Generator
      */
     protected function getAuthorEmailReplacement()
     {
-        return $this->module->config('composer.author.email');
+        return $this->plugin->config('composer.author.email');
     }
 
     protected function getProviderNamespaceReplacement(): string

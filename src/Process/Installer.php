@@ -10,21 +10,21 @@ use Symfony\Component\Process\Process;
 class Installer
 {
     /**
-     * The module name.
+     * The plugin name.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * The version of module being installed.
+     * The version of plugin being installed.
      *
      * @var string
      */
     protected $version;
 
     /**
-     * The module repository instance.
+     * The plugin repository instance.
      * @var \Hyperbolaa\Plugins\Contracts\RepositoryInterface
      */
     protected $repository;
@@ -89,7 +89,7 @@ class Installer
     }
 
     /**
-     * Set the module repository instance.
+     * Set the plugin repository instance.
      * @param \Hyperbolaa\Plugins\Contracts\RepositoryInterface $repository
      * @return $this
      */
@@ -229,7 +229,7 @@ class Installer
     }
 
     /**
-     * Get module name.
+     * Get plugin name.
      *
      * @return string
      */
@@ -255,7 +255,7 @@ class Installer
     }
 
     /**
-     * Install the module via git.
+     * Install the plugin via git.
      *
      * @return \Symfony\Component\Process\Process
      */
@@ -272,7 +272,7 @@ class Installer
     }
 
     /**
-     * Install the module via git subtree.
+     * Install the plugin via git subtree.
      *
      * @return \Symfony\Component\Process\Process
      */
@@ -290,7 +290,7 @@ class Installer
     }
 
     /**
-     * Install the module via composer.
+     * Install the plugin via composer.
      *
      * @return \Symfony\Component\Process\Process
      */

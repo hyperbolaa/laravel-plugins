@@ -20,7 +20,7 @@ class LangPublisher extends Publisher
      */
     public function getDestinationPath()
     {
-        $name = $this->module->getLowerName();
+        $name = $this->plugin->getLowerName();
 
         return base_path("resources/lang/{$name}");
     }

@@ -80,7 +80,7 @@ interface RepositoryInterface
     public function getByStatus($status);
 
     /**
-     * Find a specific module.
+     * Find a specific plugin.
      *
      * @param $name
      * @return Plugin|null
@@ -88,7 +88,7 @@ interface RepositoryInterface
     public function find(string $name);
 
     /**
-     * Find all modules that are required by a module. If the module cannot be found, throw an exception.
+     * Find all modules that are required by a plugin. If the plugin cannot be found, throw an exception.
      *
      * @param $name
      * @return array
@@ -97,7 +97,7 @@ interface RepositoryInterface
     public function findRequirements($name): array;
 
     /**
-     * Find a specific module. If there return that, otherwise throw exception.
+     * Find a specific plugin. If there return that, otherwise throw exception.
      *
      * @param $name
      *
@@ -122,14 +122,14 @@ interface RepositoryInterface
     public function config(string $key, $default = null);
 
     /**
-     * Get a module path.
+     * Get a plugin path.
      *
      * @return string
      */
     public function getPath() : string;
 
     /**
-     * Find a specific module by its alias.
+     * Find a specific plugin by its alias.
      * @param string $alias
      * @return Plugin|void
      */
@@ -146,7 +146,7 @@ interface RepositoryInterface
     public function register(): void;
 
     /**
-     * Get asset path for a specific module.
+     * Get asset path for a specific plugin.
      *
      * @param string $module
      * @return string
@@ -154,7 +154,7 @@ interface RepositoryInterface
     public function assetPath(string $module): string;
 
     /**
-     * Delete a specific module.
+     * Delete a specific plugin.
      * @param string $module
      * @return bool
      * @throws \Hyperbolaa\Plugins\Exceptions\PluginNotFoundException
@@ -162,7 +162,7 @@ interface RepositoryInterface
     public function delete(string $module): bool;
 
     /**
-     * Determine whether the given module is activated.
+     * Determine whether the given plugin is activated.
      * @param string $name
      * @return bool
      * @throws PluginNotFoundException
@@ -170,7 +170,7 @@ interface RepositoryInterface
     public function isEnabled(string $name) : bool;
 
     /**
-     * Determine whether the given module is not activated.
+     * Determine whether the given plugin is not activated.
      * @param string $name
      * @return bool
      * @throws PluginNotFoundException

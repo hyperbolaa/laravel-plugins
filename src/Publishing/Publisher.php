@@ -10,7 +10,7 @@ use Hyperbolaa\Plugins\Plugin;
 abstract class Publisher implements PublisherInterface
 {
     /**
-     * The name of module will used.
+     * The name of plugin will used.
      *
      * @var string
      */
@@ -57,7 +57,7 @@ abstract class Publisher implements PublisherInterface
      */
     public function __construct(Plugin $plugin)
     {
-        $this->module = $module;
+        $this->plugin = $module;
     }
 
     /**
@@ -85,13 +85,13 @@ abstract class Publisher implements PublisherInterface
     }
 
     /**
-     * Get module instance.
+     * Get plugin instance.
      *
      * @return \Hyperbolaa\Plugins\Plugin
      */
     public function getModule()
     {
-        return $this->module;
+        return $this->plugin;
     }
 
     /**
@@ -185,7 +185,7 @@ abstract class Publisher implements PublisherInterface
 
         if ($this->getFilesystem()->copyDirectory($sourcePath, $destinationPath)) {
             if ($this->showMessage === true) {
-                $this->console->line("<info>Published</info>: {$this->module->getStudlyName()}");
+                $this->console->line("<info>Published</info>: {$this->plugin->getStudlyName()}");
             }
         } else {
             $this->console->error($this->error);

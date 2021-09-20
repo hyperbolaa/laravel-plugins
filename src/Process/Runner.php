@@ -8,14 +8,14 @@ use Hyperbolaa\Plugins\Contracts\RunableInterface;
 class Runner implements RunableInterface
 {
     /**
-     * The module instance.
+     * The plugin instance.
      * @var RepositoryInterface
      */
     protected $module;
 
     public function __construct(RepositoryInterface $module)
     {
-        $this->module = $module;
+        $this->plugin = $module;
     }
 
     /**

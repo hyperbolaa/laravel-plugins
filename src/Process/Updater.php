@@ -7,13 +7,13 @@ use Hyperbolaa\Plugins\Plugin;
 class Updater extends Runner
 {
     /**
-     * Update the dependencies for the specified module by given the module name.
+     * Update the dependencies for the specified plugin by given the plugin name.
      *
      * @param string $module
      */
     public function update($module)
     {
-        $module = $this->module->findOrFail($module);
+        $module = $this->plugin->findOrFail($module);
 
         chdir(base_path());
 
