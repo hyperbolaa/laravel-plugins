@@ -33,9 +33,9 @@ class Updater extends Runner
     }
 
     /**
-     * @param Plugin $module
+     * @param Plugin $plugin
      */
-    private function installRequires(Plugin $module)
+    private function installRequires(Plugin $plugin)
     {
         $packages = $module->getComposerAttr('require', []);
 
@@ -50,9 +50,9 @@ class Updater extends Runner
     }
 
     /**
-     * @param Plugin $module
+     * @param Plugin $plugin
      */
-    private function installDevRequires(Plugin $module)
+    private function installDevRequires(Plugin $plugin)
     {
         $devPackages = $module->getComposerAttr('require-dev', []);
 
@@ -67,9 +67,9 @@ class Updater extends Runner
     }
 
     /**
-     * @param Plugin $module
+     * @param Plugin $plugin
      */
-    private function copyScriptsToMainComposerJson(Plugin $module)
+    private function copyScriptsToMainComposerJson(Plugin $plugin)
     {
         $scripts = $module->getComposerAttr('scripts', []);
 

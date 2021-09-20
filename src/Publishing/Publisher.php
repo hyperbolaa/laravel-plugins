@@ -53,9 +53,9 @@ abstract class Publisher implements PublisherInterface
     /**
      * The constructor.
      *
-     * @param Plugin $module
+     * @param Plugin $plugin
      */
-    public function __construct(Plugin $module)
+    public function __construct(Plugin $plugin)
     {
         $this->module = $module;
     }

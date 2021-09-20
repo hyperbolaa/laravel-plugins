@@ -44,7 +44,7 @@ class FileActivator implements ActivatorInterface
     private $cacheLifetime;
 
     /**
-     * Array of modules activation statuses
+     * Array of plugins activation statuses
      *
      * @var array
      */
@@ -93,7 +93,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function enable(Plugin $module): void
+    public function enable(Plugin $plugin): void
     {
         $this->setActiveByName($module->getName(), true);
     }
@@ -101,7 +101,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function disable(Plugin $module): void
+    public function disable(Plugin $plugin): void
     {
         $this->setActiveByName($module->getName(), false);
     }
@@ -109,7 +109,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function hasStatus(Plugin $module, bool $status): bool
+    public function hasStatus(Plugin $plugin, bool $status): bool
     {
         if (!isset($this->pluginsStatuses[$module->getName()])) {
             return $status === false;
@@ -121,7 +121,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function setActive(Plugin $module, bool $active): void
+    public function setActive(Plugin $plugin, bool $active): void
     {
         $this->setActiveByName($module->getName(), $active);
     }
@@ -139,7 +139,7 @@ class FileActivator implements ActivatorInterface
     /**
      * @inheritDoc
      */
-    public function delete(Plugin $module): void
+    public function delete(Plugin $plugin): void
     {
         if (!isset($this->pluginsStatuses[$module->getName()])) {
             return;
@@ -201,7 +201,7 @@ class FileActivator implements ActivatorInterface
     }
 
     /**
-     * Flushes the modules activation statuses cache
+     * Flushes the plugins activation statuses cache
      */
     private function flushCache(): void
     {

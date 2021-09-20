@@ -37,7 +37,7 @@ class UpdateCommand extends Command
             return 0;
         }
 
-        /** @var \Hyperbolaa\Plugins\Plugin $module */
+        /** @var \Hyperbolaa\Plugins\Plugin $plugin */
         foreach ($this->laravel['plugins']->getOrdered() as $module) {
             $this->updateModule($module->getName());
         }

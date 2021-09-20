@@ -34,7 +34,7 @@ class DisableCommand extends Command
             $this->disableAll();
         }
 
-        /** @var Plugin $module */
+        /** @var Plugin $plugin */
         $module = $this->laravel['plugins']->findOrFail($this->argument('module'));
 
         if ($module->isEnabled()) {

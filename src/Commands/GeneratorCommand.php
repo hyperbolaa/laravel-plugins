@@ -79,7 +79,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Get class namespace.
      *
-     * @param \Hyperbolaa\Plugins\Plugin $module
+     * @param \Hyperbolaa\Plugins\Plugin $plugin
      *
      * @return string
      */

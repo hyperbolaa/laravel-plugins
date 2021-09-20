@@ -36,7 +36,7 @@ class EnableCommand extends Command
             return 0;
         }
 
-        /** @var Plugin $module */
+        /** @var Plugin $plugin */
         $module = $this->laravel['plugins']->findOrFail($this->argument('module'));
 
         if ($module->isDisabled()) {

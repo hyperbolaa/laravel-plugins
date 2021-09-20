@@ -41,7 +41,7 @@ class ListCommand extends Command
     {
         $rows = [];
 
-        /** @var Plugin $module */
+        /** @var Plugin $plugin */
         foreach ($this->getModules() as $module) {
             $rows[] = [
                 $module->getName(),
