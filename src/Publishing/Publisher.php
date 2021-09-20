@@ -89,7 +89,7 @@ abstract class Publisher implements PublisherInterface
      *
      * @return \Hyperbolaa\Plugins\Plugin
      */
-    public function getModule()
+    public function getPlugin()
     {
         return $this->plugin;
     }

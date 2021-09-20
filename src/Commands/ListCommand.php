@@ -42,7 +42,7 @@ class ListCommand extends Command
         $rows = [];
 
         /** @var Plugin $plugin */
-        foreach ($this->getModules() as $plugin) {
+        foreach ($this->getPlugins() as $plugin) {
             $rows[] = [
                 $plugin->getName(),
                 $plugin->isEnabled() ? 'Enabled' : 'Disabled',
@@ -54,7 +54,7 @@ class ListCommand extends Command
         return $rows;
     }
 
-    public function getModules()
+    public function getPlugins()
     {
         switch ($this->option('only')) {
             case 'enabled':

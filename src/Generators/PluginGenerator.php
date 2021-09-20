@@ -229,7 +229,7 @@ class PluginGenerator extends Generator
      *
      * @return \Hyperbolaa\Plugins\Plugin
      */
-    public function getModule()
+    public function getPlugin()
     {
         return $this->plugin;
     }
