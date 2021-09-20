@@ -3,12 +3,12 @@
 namespace Hyperbolaa\Plugins\Commands;
 
 use Illuminate\Console\Command;
-use Hyperbolaa\Plugins\Traits\ModuleCommandTrait;
+use Hyperbolaa\Plugins\Traits\PluginCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateCommand extends Command
 {
-    use ModuleCommandTrait;
+    use PluginCommandTrait;
 
     /**
      * The console command name.

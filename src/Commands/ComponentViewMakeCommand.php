@@ -6,12 +6,12 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Str;
 use Hyperbolaa\Plugins\Support\Config\GenerateConfigReader;
 use Hyperbolaa\Plugins\Support\Stub;
-use Hyperbolaa\Plugins\Traits\ModuleCommandTrait;
+use Hyperbolaa\Plugins\Traits\PluginCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ComponentViewMakeCommand extends GeneratorCommand
 {
-    use ModuleCommandTrait;
+    use PluginCommandTrait;
 
     /**
      * The name of argument name.

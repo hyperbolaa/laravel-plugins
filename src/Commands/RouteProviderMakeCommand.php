@@ -4,13 +4,13 @@ namespace Hyperbolaa\Plugins\Commands;
 
 use Hyperbolaa\Plugins\Support\Config\GenerateConfigReader;
 use Hyperbolaa\Plugins\Support\Stub;
-use Hyperbolaa\Plugins\Traits\ModuleCommandTrait;
+use Hyperbolaa\Plugins\Traits\PluginCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class RouteProviderMakeCommand extends GeneratorCommand
 {
-    use ModuleCommandTrait;
+    use PluginCommandTrait;
 
     protected $argumentName = 'module';
 

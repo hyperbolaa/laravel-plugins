@@ -2,7 +2,7 @@
 
 namespace Hyperbolaa\Plugins\Traits;
 
-trait CanClearModulesCache
+trait CanClearPluginsCache
 {
     /**
      * Clear the modules cache if it is enabled

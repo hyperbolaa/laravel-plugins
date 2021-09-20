@@ -6,13 +6,13 @@ use Illuminate\Support\Str;
 use Hyperbolaa\Plugins\Plugin;
 use Hyperbolaa\Plugins\Support\Config\GenerateConfigReader;
 use Hyperbolaa\Plugins\Support\Stub;
-use Hyperbolaa\Plugins\Traits\ModuleCommandTrait;
+use Hyperbolaa\Plugins\Traits\PluginCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class ProviderMakeCommand extends GeneratorCommand
 {
-    use ModuleCommandTrait;
+    use PluginCommandTrait;
 
     /**
      * The name of argument name.

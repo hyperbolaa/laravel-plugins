@@ -5,13 +5,13 @@ namespace Hyperbolaa\Plugins\Commands;
 use Illuminate\Support\Str;
 use Hyperbolaa\Plugins\Support\Config\GenerateConfigReader;
 use Hyperbolaa\Plugins\Support\Stub;
-use Hyperbolaa\Plugins\Traits\ModuleCommandTrait;
+use Hyperbolaa\Plugins\Traits\PluginCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class CommandMakeCommand extends GeneratorCommand
 {
-    use ModuleCommandTrait;
+    use PluginCommandTrait;
 
     /**
      * The name of argument name.
