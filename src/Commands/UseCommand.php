@@ -20,14 +20,14 @@ class UseCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Use the specified module.';
+    protected $description = 'Use the specified plugin.';
 
     /**
      * Execute the console command.
      */
     public function handle() : int
     {
-        $module = Str::studly($this->argument('module'));
+        $module = Str::studly($this->argument('plugin'));
 
         if (!$this->laravel['plugins']->has($module)) {
             $this->error("Module [{$module}] does not exists.");
@@ -50,7 +50,7 @@ class UseCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::REQUIRED, 'The name of module will be used.'],
+            ['plugin', InputArgument::REQUIRED, 'The name of plugin will be used.'],
         ];
     }
 }

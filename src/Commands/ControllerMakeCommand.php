@@ -32,7 +32,7 @@ class ControllerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Generate new restful controller for the specified module.';
+    protected $description = 'Generate new restful controller for the specified plugin.';
 
     /**
      * Get controller name.
@@ -78,7 +78,7 @@ class ControllerMakeCommand extends GeneratorCommand
     {
         return [
             ['controller', InputArgument::REQUIRED, 'The name of the controller class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

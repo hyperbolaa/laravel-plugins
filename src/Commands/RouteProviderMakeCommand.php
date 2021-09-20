@@ -12,7 +12,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
 {
     use PluginCommandTrait;
 
-    protected $argumentName = 'module';
+    protected $argumentName = 'plugin';
 
     /**
      * The command name.
@@ -26,7 +26,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new route service provider for the specified module.';
+    protected $description = 'Create a new route service provider for the specified plugin.';
 
     /**
      * The command arguments.
@@ -36,7 +36,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

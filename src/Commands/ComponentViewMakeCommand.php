@@ -32,7 +32,7 @@ class ComponentViewMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new component-view for the specified module.';
+    protected $description = 'Create a new component-view for the specified plugin.';
 
     /**
      * Get the console command arguments.
@@ -43,7 +43,7 @@ class ComponentViewMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the component.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

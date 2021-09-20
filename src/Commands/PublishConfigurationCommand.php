@@ -21,14 +21,14 @@ class PublishConfigurationCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a module\'s config files to the application';
+    protected $description = 'Publish a plugin\'s config files to the application';
 
     /**
      * Execute the console command.
      */
     public function handle() : int
     {
-        if ($module = $this->argument('module')) {
+        if ($module = $this->argument('plugin')) {
             $this->publishConfiguration($module);
 
             return 0;
@@ -47,7 +47,7 @@ class PublishConfigurationCommand extends Command
      */
     private function getServiceProviderForModule($module)
     {
-        $namespace = $this->laravel['config']->get('modules.namespace');
+        $namespace = $this->laravel['config']->get('plugins.namespace');
         $studlyName = Str::studly($module);
 
         return "$namespace\\$studlyName\\Providers\\{$studlyName}ServiceProvider";
@@ -73,7 +73,7 @@ class PublishConfigurationCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module being used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin being used.'],
         ];
     }
 

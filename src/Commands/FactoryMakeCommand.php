@@ -31,7 +31,7 @@ class FactoryMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new model factory for the specified module.';
+    protected $description = 'Create a new model factory for the specified plugin.';
 
     /**
      * Get the console command arguments.
@@ -42,7 +42,7 @@ class FactoryMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the model.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

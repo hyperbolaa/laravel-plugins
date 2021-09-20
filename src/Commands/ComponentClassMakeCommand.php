@@ -31,7 +31,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new component-class for the specified module.';
+    protected $description = 'Create a new component-class for the specified plugin.';
 
     public function handle() : int
     {
@@ -49,7 +49,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
      */
     protected function writeComponentViewTemplate()
     {
-        $this->call('plugin:make-component-view', ['name' => $this->argument('name') , 'module' => $this->argument('module')]);
+        $this->call('plugin:make-component-view', ['name' => $this->argument('name') , 'plugin' => $this->argument('plugin')]);
     }
 
     public function getDefaultNamespace() : string
@@ -68,7 +68,7 @@ class ComponentClassMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the component.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
     /**

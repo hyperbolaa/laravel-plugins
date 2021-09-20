@@ -18,7 +18,7 @@ class UnUseCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Forget the used module with plugin:use';
+    protected $description = 'Forget the used plugin with plugin:use';
 
     /**
      * Execute the console command.
@@ -27,7 +27,7 @@ class UnUseCommand extends Command
     {
         $this->laravel['plugins']->forgetUsed();
 
-        $this->info('Previous module used successfully forgotten.');
+        $this->info('Previous plugin used successfully forgotten.');
 
         return 0;
     }

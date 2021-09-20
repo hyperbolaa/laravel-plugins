@@ -8,7 +8,7 @@ use Hyperbolaa\Plugins\Generators\PluginGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ModuleMakeCommand extends Command
+class PluginMakeCommand extends Command
 {
     /**
      * The console command name.
@@ -22,7 +22,7 @@ class ModuleMakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new module.';
+    protected $description = 'Create a new plugin.';
 
     /**
      * Execute the console command.
@@ -60,23 +60,23 @@ class ModuleMakeCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::IS_ARRAY, 'The names of modules will be created.'],
+            ['name', InputArgument::IS_ARRAY, 'The names of plugins will be created.'],
         ];
     }
 
     protected function getOptions()
     {
         return [
-            ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain module (without some resources).'],
-            ['api', null, InputOption::VALUE_NONE, 'Generate an api module.'],
-            ['web', null, InputOption::VALUE_NONE, 'Generate a web module.'],
-            ['disabled', 'd', InputOption::VALUE_NONE, 'Do not enable the module at creation.'],
-            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the module already exists.'],
+            ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain plugin (without some resources).'],
+            ['api', null, InputOption::VALUE_NONE, 'Generate an api plugin.'],
+            ['web', null, InputOption::VALUE_NONE, 'Generate a web plugin.'],
+            ['disabled', 'd', InputOption::VALUE_NONE, 'Do not enable the plugin at creation.'],
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the plugin already exists.'],
         ];
     }
 
     /**
-    * Get module type .
+    * Get plugin type .
     *
     * @return string
     */

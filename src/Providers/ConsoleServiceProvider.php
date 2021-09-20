@@ -28,8 +28,8 @@ class ConsoleServiceProvider extends ServiceProvider
         Commands\RouteProviderMakeCommand::class,
         Commands\InstallCommand::class,
         Commands\ListCommand::class,
-        Commands\ModuleDeleteCommand::class,
-        Commands\ModuleMakeCommand::class,
+        Commands\PluginDeleteCommand::class,
+        Commands\PluginMakeCommand::class,
         Commands\FactoryMakeCommand::class,
         Commands\PolicyMakeCommand::class,
         Commands\RequestMakeCommand::class,
@@ -59,7 +59,7 @@ class ConsoleServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->commands(config('modules.commands', $this->commands));
+        $this->commands(config('plugins.commands', $this->commands));
     }
 
     public function provides(): array

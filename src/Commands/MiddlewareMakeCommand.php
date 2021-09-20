@@ -31,7 +31,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new middleware class for the specified module.';
+    protected $description = 'Create a new middleware class for the specified plugin.';
 
     public function getDefaultNamespace() : string
     {
@@ -49,7 +49,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the command.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

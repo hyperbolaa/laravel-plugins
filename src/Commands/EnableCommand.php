@@ -20,7 +20,7 @@ class EnableCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Enable the specified module.';
+    protected $description = 'Enable the specified plugin.';
 
     /**
      * Execute the console command.
@@ -30,14 +30,14 @@ class EnableCommand extends Command
         /**
          * check if user entred an argument
          */
-        if ($this->argument('module') === null) {
+        if ($this->argument('plugin') === null) {
             $this->enableAll();
 
             return 0;
         }
 
         /** @var Plugin $plugin */
-        $module = $this->laravel['plugins']->findOrFail($this->argument('module'));
+        $module = $this->laravel['plugins']->findOrFail($this->argument('plugin'));
 
         if ($module->isDisabled()) {
             $module->enable();
@@ -79,7 +79,7 @@ class EnableCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'Module name.'],
+            ['plugin', InputArgument::OPTIONAL, 'Module name.'],
         ];
     }
 }

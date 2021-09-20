@@ -17,7 +17,7 @@ abstract class Publisher implements PublisherInterface
     protected $module;
 
     /**
-     * The modules repository instance.
+     * The plugins repository instance.
      * @var RepositoryInterface
      */
     protected $repository;
@@ -95,7 +95,7 @@ abstract class Publisher implements PublisherInterface
     }
 
     /**
-     * Set modules repository instance.
+     * Set plugins repository instance.
      * @param RepositoryInterface $repository
      * @return $this
      */
@@ -107,7 +107,7 @@ abstract class Publisher implements PublisherInterface
     }
 
     /**
-     * Get modules repository instance.
+     * Get plugins repository instance.
      *
      * @return RepositoryInterface
      */

@@ -33,7 +33,7 @@ class ProviderMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new service provider class for the specified module.';
+    protected $description = 'Create a new service provider class for the specified plugin.';
 
     public function getDefaultNamespace() : string
     {
@@ -51,7 +51,7 @@ class ProviderMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The service provider name.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

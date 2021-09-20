@@ -22,14 +22,14 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Update dependencies for the specified module or for all modules.';
+    protected $description = 'Update dependencies for the specified plugin or for all plugins.';
 
     /**
      * Execute the console command.
      */
     public function handle() : int
     {
-        $name = $this->argument('module');
+        $name = $this->argument('plugin');
 
         if ($name) {
             $this->updateModule($name);
@@ -62,7 +62,7 @@ class UpdateCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be updated.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be updated.'],
         ];
     }
 }

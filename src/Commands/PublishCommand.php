@@ -21,14 +21,14 @@ class PublishCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a module\'s assets to the application';
+    protected $description = 'Publish a plugin\'s assets to the application';
 
     /**
      * Execute the console command.
      */
     public function handle() : int
     {
-        if ($name = $this->argument('module')) {
+        if ($name = $this->argument('plugin')) {
             $this->publish($name);
 
             return 0;
@@ -40,7 +40,7 @@ class PublishCommand extends Command
     }
 
     /**
-     * Publish assets from all modules.
+     * Publish assets from all plugins.
      */
     public function publishAll()
     {
@@ -50,7 +50,7 @@ class PublishCommand extends Command
     }
 
     /**
-     * Publish assets from the specified module.
+     * Publish assets from the specified plugin.
      *
      * @param string $name
      */
@@ -78,7 +78,7 @@ class PublishCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 }

@@ -15,7 +15,7 @@ class ResourceMakeCommand extends GeneratorCommand
 
     protected $argumentName = 'name';
     protected $name = 'plugin:make-resource';
-    protected $description = 'Create a new resource class for the specified module.';
+    protected $description = 'Create a new resource class for the specified plugin.';
 
     public function getDefaultNamespace() : string
     {
@@ -33,7 +33,7 @@ class ResourceMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the resource class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 

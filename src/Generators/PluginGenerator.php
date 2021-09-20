@@ -163,7 +163,7 @@ class PluginGenerator extends Generator
     }
 
     /**
-     * Set the modules activator
+     * Set the plugins activator
      *
      * @param ActivatorInterface $activator
      *

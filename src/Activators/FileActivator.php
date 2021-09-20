@@ -172,14 +172,14 @@ class FileActivator implements ActivatorInterface
     }
 
     /**
-     * Get modules statuses, either from the cache or from
+     * Get plugins statuses, either from the cache or from
      * the json statuses file if the cache is disabled.
      * @return array
      * @throws FileNotFoundException
      */
     private function getPluginsStatuses(): array
     {
-        if (!$this->config->get('modules.cache.enabled')) {
+        if (!$this->config->get('plugins.cache.enabled')) {
             return $this->readJson();
         }
 
@@ -197,7 +197,7 @@ class FileActivator implements ActivatorInterface
      */
     private function config(string $key, $default = null)
     {
-        return $this->config->get('modules.activators.file.' . $key, $default);
+        return $this->config->get('plugins.activators.file.' . $key, $default);
     }
 
     /**

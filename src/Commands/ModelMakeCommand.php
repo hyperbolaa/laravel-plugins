@@ -32,7 +32,7 @@ class ModelMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new model for the specified module.';
+    protected $description = 'Create a new model for the specified plugin.';
 
     public function handle() : int
     {
@@ -77,7 +77,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         return [
             ['model', InputArgument::REQUIRED, 'The name of model will be created.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 
@@ -102,7 +102,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         if ($this->option('migration') === true) {
             $migrationName = 'create_' . $this->createMigrationName() . '_table';
-            $this->call('plugin:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
+            $this->call('plugin:make-migration', ['name' => $migrationName, 'plugin' => $this->argument('plugin')]);
         }
     }
 
@@ -116,7 +116,7 @@ class ModelMakeCommand extends GeneratorCommand
 
             $this->call('plugin:make-controller', array_filter([
                 'controller' => $controllerName,
-                'module' => $this->argument('module')
+                'plugin' => $this->argument('plugin')
             ]));
         }
     }

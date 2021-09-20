@@ -8,28 +8,28 @@ use Hyperbolaa\Plugins\Plugin;
 interface RepositoryInterface
 {
     /**
-     * Get all modules.
+     * Get all plugins.
      *
      * @return mixed
      */
     public function all();
 
     /**
-     * Get cached modules.
+     * Get cached plugins.
      *
      * @return array
      */
     public function getCached();
 
     /**
-     * Scan & get all available modules.
+     * Scan & get all available plugins.
      *
      * @return array
      */
     public function scan();
 
     /**
-     * Get modules as modules collection instance.
+     * Get plugins as plugins collection instance.
      *
      * @return \Hyperbolaa\Plugins\Collection
      */
@@ -43,35 +43,35 @@ interface RepositoryInterface
     public function getScanPaths();
 
     /**
-     * Get list of enabled modules.
+     * Get list of enabled plugins.
      *
      * @return mixed
      */
     public function allEnabled();
 
     /**
-     * Get list of disabled modules.
+     * Get list of disabled plugins.
      *
      * @return mixed
      */
     public function allDisabled();
 
     /**
-     * Get count from all modules.
+     * Get count from all plugins.
      *
      * @return int
      */
     public function count();
 
     /**
-     * Get all ordered modules.
+     * Get all ordered plugins.
      * @param string $direction
      * @return mixed
      */
     public function getOrdered($direction = 'asc');
 
     /**
-     * Get modules by the given status.
+     * Get plugins by the given status.
      *
      * @param int $status
      *
@@ -88,7 +88,7 @@ interface RepositoryInterface
     public function find(string $name);
 
     /**
-     * Find all modules that are required by a plugin. If the plugin cannot be found, throw an exception.
+     * Find all plugins that are required by a plugin. If the plugin cannot be found, throw an exception.
      *
      * @param $name
      * @return array
@@ -136,12 +136,12 @@ interface RepositoryInterface
     public function findByAlias(string $alias);
 
     /**
-     * Boot the modules.
+     * Boot the plugins.
      */
     public function boot(): void;
 
     /**
-     * Register the modules.
+     * Register the plugins.
      */
     public function register(): void;
 

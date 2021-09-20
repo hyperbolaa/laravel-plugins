@@ -5,7 +5,7 @@ namespace Hyperbolaa\Plugins\Traits;
 trait CanClearPluginsCache
 {
     /**
-     * Clear the modules cache if it is enabled
+     * Clear the plugins cache if it is enabled
      */
     public function clearCache()
     {
