@@ -25,7 +25,7 @@ class SetupCommand extends Command
      */
     public function handle() : int
     {
-        $code = $this->generateModulesFolder();
+        $code = $this->generatePluginsFolder();
 
         return $this->generateAssetsFolder() | $code;
     }
@@ -33,7 +33,7 @@ class SetupCommand extends Command
     /**
      * Generate the plugins folder.
      */
-    public function generateModulesFolder()
+    public function generatePluginsFolder()
     {
         return $this->generateDirectory(
             $this->laravel['plugins']->config('paths.plugins'),

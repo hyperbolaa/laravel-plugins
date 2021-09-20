@@ -241,7 +241,7 @@ class PluginGenerator extends Generator
      *
      * @return $this
      */
-    public function setModule($plugin)
+    public function setPlugin($plugin)
     {
         $this->plugin = $plugin;
 

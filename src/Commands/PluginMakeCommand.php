@@ -35,12 +35,12 @@ class PluginMakeCommand extends Command
         foreach ($names as $name) {
             $code = with(new PluginGenerator($name))
                 ->setFilesystem($this->laravel['files'])
-                ->setModule($this->laravel['plugins'])
+                ->setPlugin($this->laravel['plugins'])
                 ->setConfig($this->laravel['config'])
                 ->setActivator($this->laravel[ActivatorInterface::class])
                 ->setConsole($this)
                 ->setForce($this->option('force'))
-                ->setType($this->getModuleType())
+                ->setType($this->getPluginType())
                 ->setActive(!$this->option('disabled'))
                 ->generate();
 
@@ -80,7 +80,7 @@ class PluginMakeCommand extends Command
     *
     * @return string
     */
-    private function getModuleType()
+    private function getPluginType()
     {
         $isPlain = $this->option('plain');
         $isApi = $this->option('api');

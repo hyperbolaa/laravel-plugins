@@ -32,20 +32,20 @@ class UpdateCommand extends Command
         $name = $this->argument('plugin');
 
         if ($name) {
-            $this->updateModule($name);
+            $this->updatePlugin($name);
 
             return 0;
         }
 
         /** @var \Hyperbolaa\Plugins\Plugin $plugin */
         foreach ($this->laravel['plugins']->getOrdered() as $plugin) {
-            $this->updateModule($plugin->getName());
+            $this->updatePlugin($plugin->getName());
         }
 
         return 0;
     }
 
-    protected function updateModule($name)
+    protected function updatePlugin($name)
     {
         $this->line('Running for plugin: <info>' . $name . '</info>');
 
