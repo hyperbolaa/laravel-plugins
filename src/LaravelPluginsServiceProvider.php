@@ -38,10 +38,10 @@ class LaravelPluginsServiceProvider extends PluginsServiceProvider
         Stub::setBasePath($path);
 
         $this->app->booted(function ($app) {
-            /** @var RepositoryInterface $moduleRepository */
-            $moduleRepository = $app[RepositoryInterface::class];
-            if ($moduleRepository->config('stubs.enabled') === true) {
-                Stub::setBasePath($moduleRepository->config('stubs.path'));
+            /** @var RepositoryInterface $pluginRepository */
+            $pluginRepository = $app[RepositoryInterface::class];
+            if ($pluginRepository->config('stubs.enabled') === true) {
+                Stub::setBasePath($pluginRepository->config('stubs.path'));
             }
         });
     }

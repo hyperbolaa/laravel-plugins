@@ -40,9 +40,9 @@ class DisableCommand extends Command
         if ($plugin->isEnabled()) {
             $plugin->disable();
 
-            $this->info("Module [{$plugin}] disabled successful.");
+            $this->info("Plugin [{$plugin}] disabled successful.");
         } else {
-            $this->comment("Module [{$plugin}] has already disabled.");
+            $this->comment("Plugin [{$plugin}] has already disabled.");
         }
 
         return 0;
@@ -62,9 +62,9 @@ class DisableCommand extends Command
             if ($plugin->isEnabled()) {
                 $plugin->disable();
 
-                $this->info("Module [{$plugin}] disabled successful.");
+                $this->info("Plugin [{$plugin}] disabled successful.");
             } else {
-                $this->comment("Module [{$plugin}] has already disabled.");
+                $this->comment("Plugin [{$plugin}] has already disabled.");
             }
         }
     }
@@ -77,7 +77,7 @@ class DisableCommand extends Command
     protected function getArguments()
     {
         return [
-            ['plugin', InputArgument::OPTIONAL, 'Module name.'],
+            ['plugin', InputArgument::OPTIONAL, 'Plugin name.'],
         ];
     }
 }

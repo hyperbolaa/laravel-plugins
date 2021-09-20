@@ -58,7 +58,7 @@ class DumpCommand extends Command
     protected function getArguments()
     {
         return [
-            ['plugin', InputArgument::OPTIONAL, 'Module name.'],
+            ['plugin', InputArgument::OPTIONAL, 'Plugin name.'],
         ];
     }
 }

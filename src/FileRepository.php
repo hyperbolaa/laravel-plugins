@@ -226,7 +226,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $plugins = [];
 
-        /** @var Module $plugin */
+        /** @var Plugin $plugin */
         foreach ($this->all() as $name => $plugin) {
             if ($plugin->isStatus($status)) {
                 $plugins[$name] = $plugin;
@@ -289,7 +289,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $plugins = $this->allEnabled();
 
-        uasort($plugins, function (Module $a, Module $b) use ($direction) {
+        uasort($plugins, function (Plugin $a, Plugin $b) use ($direction) {
             if ($a->get('priority') === $b->get('priority')) {
                 return 0;
             }
@@ -381,7 +381,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      *
      * @param $name
      *
-     * @return Module
+     * @return Plugin
      *
      * @throws PluginNotFoundException
      */
@@ -393,7 +393,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             return $plugin;
         }
 
-        throw new PluginNotFoundException("Module [{$name}] does not exist!");
+        throw new PluginNotFoundException("Plugin [{$name}] does not exist!");
     }
 
     /**

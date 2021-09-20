@@ -39,7 +39,7 @@ abstract class Plugin
     /**
      * @var array of cached Json objects, keyed by filename
      */
-    protected $moduleJson = [];
+    protected $pluginJson = [];
     /**
      * @var CacheManager
      */
@@ -171,7 +171,7 @@ abstract class Plugin
      *
      * @return $this
      */
-    public function setPath($path): Module
+    public function setPath($path): Plugin
     {
         $this->path = $path;
 
@@ -223,8 +223,8 @@ abstract class Plugin
             $file = 'plugin.json';
         }
 
-        return Arr::get($this->moduleJson, $file, function () use ($file) {
-            return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
+        return Arr::get($this->pluginJson, $file, function () use ($file) {
+            return $this->pluginJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
         });
     }
 
@@ -290,7 +290,7 @@ abstract class Plugin
     abstract public function registerProviders(): void;
 
     /**
-     * Get the path to the cached *_module.php file.
+     * Get the path to the cached *_plugin.php file.
      *
      * @return string
      */

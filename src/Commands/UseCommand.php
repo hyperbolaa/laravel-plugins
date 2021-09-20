@@ -30,14 +30,14 @@ class UseCommand extends Command
         $plugin = Str::studly($this->argument('plugin'));
 
         if (!$this->laravel['plugins']->has($plugin)) {
-            $this->error("Module [{$plugin}] does not exists.");
+            $this->error("Plugin [{$plugin}] does not exists.");
 
             return E_ERROR;
         }
 
         $this->laravel['plugins']->setUsed($plugin);
 
-        $this->info("Module [{$plugin}] used successfully.");
+        $this->info("Plugin [{$plugin}] used successfully.");
 
         return 0;
     }

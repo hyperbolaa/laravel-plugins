@@ -42,9 +42,9 @@ class EnableCommand extends Command
         if ($plugin->isDisabled()) {
             $plugin->enable();
 
-            $this->info("Module [{$plugin}] enabled successful.");
+            $this->info("Plugin [{$plugin}] enabled successful.");
         } else {
-            $this->comment("Module [{$plugin}] has already enabled.");
+            $this->comment("Plugin [{$plugin}] has already enabled.");
         }
 
         return 0;
@@ -64,9 +64,9 @@ class EnableCommand extends Command
             if ($plugin->isDisabled()) {
                 $plugin->enable();
 
-                $this->info("Module [{$plugin}] enabled successful.");
+                $this->info("Plugin [{$plugin}] enabled successful.");
             } else {
-                $this->comment("Module [{$plugin}] has already enabled.");
+                $this->comment("Plugin [{$plugin}] has already enabled.");
             }
         }
     }
@@ -79,7 +79,7 @@ class EnableCommand extends Command
     protected function getArguments()
     {
         return [
-            ['plugin', InputArgument::OPTIONAL, 'Module name.'],
+            ['plugin', InputArgument::OPTIONAL, 'Plugin name.'],
         ];
     }
 }

@@ -293,7 +293,7 @@ class PluginGenerator extends Generator
             if ($this->force) {
                 $this->plugin->delete($name);
             } else {
-                $this->console->error("Module [{$name}] already exist!");
+                $this->console->error("Plugin [{$name}] already exist!");
 
                 return E_ERROR;
             }
@@ -309,12 +309,12 @@ class PluginGenerator extends Generator
         }
 
         if ($this->type === 'plain') {
-            $this->cleanModuleJsonFile();
+            $this->cleanPluginJsonFile();
         }
 
         $this->activator->setActiveByName($name, $this->isActive);
 
-        $this->console->info("Module [{$name}] created successfully.");
+        $this->console->info("Plugin [{$name}] created successfully.");
 
         return 0;
     }
@@ -433,7 +433,7 @@ class PluginGenerator extends Generator
      * Remove the default service provider that was added in the plugin.json file
      * This is needed when a --plain plugin was created
      */
-    private function cleanModuleJsonFile()
+    private function cleanPluginJsonFile()
     {
         $path = $this->plugin->getPluginPath($this->getName()) . 'plugin.json';
 

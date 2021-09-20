@@ -14,7 +14,7 @@ class PluginDeleteCommand extends Command
     {
         $this->laravel['plugins']->delete($this->argument('plugin'));
 
-        $this->info("Module {$this->argument('plugin')} has been deleted.");
+        $this->info("Plugin {$this->argument('plugin')} has been deleted.");
 
         return 0;
     }
