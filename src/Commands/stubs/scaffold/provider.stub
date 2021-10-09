@@ -3,7 +3,6 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class $CLASS$ extends ServiceProvider
 {
@@ -27,7 +26,6 @@ class $CLASS$ extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(plugin_path($this->pluginName, '$MIGRATIONS_PATH$'));
     }
 
     /**

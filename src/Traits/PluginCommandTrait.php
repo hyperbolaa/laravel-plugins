@@ -12,7 +12,6 @@ trait PluginCommandTrait
     public function getPluginName()
     {
         $plugin = $this->argument('plugin') ?: app('plugins')->getUsedNow();
-
         $plugin = app('plugins')->findOrFail($plugin);
 
         return $plugin->getStudlyName();

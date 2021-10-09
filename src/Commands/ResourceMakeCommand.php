@@ -21,7 +21,7 @@ class ResourceMakeCommand extends GeneratorCommand
     {
         $plugin = $this->laravel['plugins'];
 
-        return $plugin->config('paths.generator.resource.namespace') ?: $plugin->config('paths.generator.resource.path', 'Transformers');
+        return $plugin->config('paths.generator.resource.namespace') ?: $plugin->config('paths.generator.resource.path', 'Http/Resources');
     }
 
     /**

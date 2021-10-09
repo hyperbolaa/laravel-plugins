@@ -53,7 +53,7 @@ class LaravelPluginsServiceProvider extends PluginsServiceProvider
     {
         $this->app->singleton(Contracts\RepositoryInterface::class, function ($app) {
             $path = $app['config']->get('plugins.paths.plugins');
-
+            echo $path;exit;
             return new Laravel\LaravelFileRepository($app, $path);
         });
         $this->app->singleton(Contracts\ActivatorInterface::class, function ($app) {

@@ -19,25 +19,35 @@ class Stub
     protected static $basePath = null;
 
     /**
+     * The replacements array.
+     *
+     * @var array
+     */
+    protected $replaces = [];
+
+    /**
      * The contructor.
      *
      * @param string $path
+     * @param array  $replaces
      */
-    public function __construct($path)
+    public function __construct($path, array $replaces = [])
     {
         $this->path = $path;
+        $this->replaces = $replaces;
     }
 
     /**
      * Create new self instance.
      *
      * @param string $path
+     * @param array  $replaces
      *
      * @return self
      */
-    public static function create($path)
+    public static function create($path, array $replaces = [])
     {
-        return new static($path);
+        return new static($path, $replaces);
     }
 
     /**
@@ -93,7 +103,13 @@ class Stub
      */
     public function getContents()
     {
-        return file_get_contents($this->getPath());
+        $contents = file_get_contents($this->getPath());
+
+        foreach ($this->replaces as $search => $replace) {
+            $contents = str_replace('$' . strtoupper($search) . '$', $replace, $contents);
+        }
+
+        return $contents;
     }
 
     /**
@@ -119,6 +135,29 @@ class Stub
         return file_put_contents($path . '/' . $filename, $this->getContents());
     }
 
+    /**
+     * Set replacements array.
+     *
+     * @param array $replaces
+     *
+     * @return $this
+     */
+    public function replace(array $replaces = [])
+    {
+        $this->replaces = $replaces;
+
+        return $this;
+    }
+
+    /**
+     * Get replacements.
+     *
+     * @return array
+     */
+    public function getReplaces()
+    {
+        return $this->replaces;
+    }
 
     /**
      * Handle magic method __toString.

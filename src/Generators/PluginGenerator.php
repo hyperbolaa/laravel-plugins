@@ -288,7 +288,6 @@ class PluginGenerator extends Generator
     public function generate() : int
     {
         $name = $this->getName();
-
         if ($this->plugin->has($name)) {
             if ($this->force) {
                 $this->plugin->delete($name);
@@ -373,14 +372,6 @@ class PluginGenerator extends Generator
      */
     public function generateResources()
     {
-        if (GenerateConfigReader::read('seeder')->generate() === true) {
-            $this->console->call('plugin:make-seed', [
-                'name' => $this->getName(),
-                'plugin' => $this->getName(),
-                '--master' => true,
-            ]);
-        }
-
         if (GenerateConfigReader::read('provider')->generate() === true) {
             $this->console->call('plugin:make-provider', [
                 'name' => $this->getName() . 'ServiceProvider',
@@ -410,7 +401,54 @@ class PluginGenerator extends Generator
      */
     protected function getStubContents($stub)
     {
-        return (new Stub('/' . $stub . '.stub'))->render();
+        return (new Stub(
+            '/' . $stub . '.stub',
+            $this->getReplacement($stub)
+        )
+        )->render();
+    }
+
+    /**
+     * get the list for the replacements.
+     */
+    public function getReplacements()
+    {
+        return $this->plugin->config('stubs.replacements');
+    }
+
+    /**
+     * Get array replacement for the specified stub.
+     *
+     * @param $stub
+     *
+     * @return array
+     */
+    protected function getReplacement($stub)
+    {
+        $replacements = $this->plugin->config('stubs.replacements');
+
+        if (!isset($replacements[$stub])) {
+            return [];
+        }
+
+        $keys = $replacements[$stub];
+
+        $replaces = [];
+
+        if ($stub === 'json' || $stub === 'composer') {
+            if (in_array('PROVIDER_NAMESPACE', $keys, true) === false) {
+                $keys[] = 'PROVIDER_NAMESPACE';
+            }
+        }
+        foreach ($keys as $key) {
+            if (method_exists($this, $method = 'get' . ucfirst(Str::studly(strtolower($key))) . 'Replacement')) {
+                $replaces[$key] = $this->$method();
+            } else {
+                $replaces[$key] = null;
+            }
+        }
+
+        return $replaces;
     }
 
     /**

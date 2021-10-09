@@ -43,7 +43,7 @@ class PluginMakeCommand extends Command
                 ->setType($this->getPluginType())
                 ->setActive(!$this->option('disabled'))
                 ->generate();
-
+            
             if ($code === E_ERROR) {
                 $success = false;
             }

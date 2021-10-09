@@ -38,7 +38,6 @@ class ProviderMakeCommand extends GeneratorCommand
     public function getDefaultNamespace() : string
     {
         $plugin = $this->laravel['plugins'];
-
         return $plugin->config('paths.generator.provider.namespace') ?: $plugin->config('paths.generator.provider.path', 'Providers');
     }
 

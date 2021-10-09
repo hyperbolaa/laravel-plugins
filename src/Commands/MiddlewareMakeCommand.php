@@ -37,7 +37,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
     {
         $plugin = $this->laravel['plugins'];
 
-        return $plugin->config('paths.generator.filter.namespace') ?: $plugin->config('paths.generator.filter.path', 'Http/Middleware');
+        return $plugin->config('paths.generator.middleware.namespace') ?: $plugin->config('paths.generator.middleware.path', 'Http/Middleware');
     }
 
     /**
@@ -73,7 +73,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
     {
         $path = $this->laravel['plugins']->getPluginPath($this->getPluginName());
 
-        $middlewarePath = GenerateConfigReader::read('filter');
+        $middlewarePath = GenerateConfigReader::read('middleware');
 
         return $path . $middlewarePath->getPath() . '/' . $this->getFileName() . '.php';
     }
