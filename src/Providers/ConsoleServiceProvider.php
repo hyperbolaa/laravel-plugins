@@ -30,6 +30,7 @@ class ConsoleServiceProvider extends ServiceProvider
         Commands\PublishTranslationCommand::class,
         Commands\SetupCommand::class,
         Commands\UnUseCommand::class,
+        Commands\InstallCommand::class,
         Commands\UpdateCommand::class,
         Commands\UseCommand::class,
         Commands\ResourceMakeCommand::class,

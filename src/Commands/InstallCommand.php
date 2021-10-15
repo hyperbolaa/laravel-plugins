@@ -22,7 +22,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the specified plugin by given package name (vendor/name).';
+    protected $description = 'Install the specified package by given package name (vendor/name).';
 
     /**
      * Create a new command instance.
@@ -37,66 +37,23 @@ class InstallCommand extends Command
      */
     public function handle() : int
     {
-        if (is_null($this->argument('name'))) {
-            return $this->installFromFile();
-        }
-
         $this->install(
             $this->argument('name'),
-            $this->argument('version'),
-            $this->option('type'),
-            $this->option('tree')
+            $this->argument('version')
         );
 
         return 0;
     }
 
     /**
-     * Install plugins from plugins.json file.
-     */
-    protected function installFromFile() : int
-    {
-        if (!file_exists($path = base_path('plugins.json'))) {
-            $this->error("File 'plugins.json' does not exist in your project root.");
-
-            return E_ERROR;
-        }
-
-        $plugins = Json::make($path);
-
-        $dependencies = $plugins->get('require', []);
-
-        foreach ($dependencies as $plugin) {
-            $plugin = collect($plugin);
-
-            $this->install(
-                $plugin->get('name'),
-                $plugin->get('version'),
-                $plugin->get('type')
-            );
-        }
-
-        return 0;
-    }
-
-    /**
-     * Install the specified plugin.
+     * Install the package.
      *
      * @param string $name
      * @param string $version
-     * @param string $type
-     * @param bool   $tree
      */
-    protected function install($name, $version = 'dev-master', $type = 'composer', $tree = false)
+    protected function install($name, $version = 'dev-master')
     {
-        $installer = new Installer(
-            $name,
-            $version,
-            $type ?: $this->option('type'),
-            $tree ?: $this->option('tree')
-        );
-
-        $installer->setRepository($this->laravel['plugins']);
+        $installer = new Installer($name, $version);
 
         $installer->setConsole($this);
 
@@ -104,17 +61,7 @@ class InstallCommand extends Command
             $installer->setTimeout($timeout);
         }
 
-        if ($path = $this->option('path')) {
-            $installer->setPath($path);
-        }
-
         $installer->run();
-
-        if (!$this->option('no-update')) {
-            $this->call('plugin:update', [
-                'plugin' => $installer->getPluginName(),
-            ]);
-        }
     }
 
     /**
@@ -125,8 +72,8 @@ class InstallCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::OPTIONAL, 'The name of plugin will be installed.'],
-            ['version', InputArgument::OPTIONAL, 'The version of plugin will be installed.'],
+            ['name', InputArgument::OPTIONAL, 'The name of package will be installed.'],
+            ['version', InputArgument::OPTIONAL, 'The version of package will be installed.'],
         ];
     }
 
@@ -139,10 +86,6 @@ class InstallCommand extends Command
     {
         return [
             ['timeout', null, InputOption::VALUE_OPTIONAL, 'The process timeout.', null],
-            ['path', null, InputOption::VALUE_OPTIONAL, 'The installation path.', null],
-            ['type', null, InputOption::VALUE_OPTIONAL, 'The type of installation.', null],
-            ['tree', null, InputOption::VALUE_NONE, 'Install the plugin as a git subtree', null],
-            ['no-update', null, InputOption::VALUE_NONE, 'Disables the automatic update of the dependencies.', null],
         ];
     }
 }
